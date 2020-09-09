@@ -1,0 +1,21 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 30,
+            "database": "groupomania",
+            "driver": "SAPHana",
+            "hanaOptions": {
+                "encrypt": true,
+                "sslCryptoProvider": "openssl",
+                "sslValidateCertificate": true
+            },
+            "name": "Local instance groupomania",
+            "password": "tardis64",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "localhost",
+            "username": "root@localhost"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
