@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@angular/cli": "^10.1.0",
+    "@vue/cli": "^4.5.4",
     "sass": "^1.26.10",
     "vue": "^2.6.12"
   }
