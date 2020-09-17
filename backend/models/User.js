@@ -1,4 +1,4 @@
-const userSchema = mongoose.Schema ({
+const userSchema = Schema ({
     userId: { type: String},
     email: { type: String, required: true, unique: true},
     password: { type: String, required: true}
@@ -6,4 +6,4 @@ const userSchema = mongoose.Schema ({
 
 userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = model('User', userSchema);
