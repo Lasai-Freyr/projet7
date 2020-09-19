@@ -17,8 +17,14 @@ exports.createPost = (req, res) => {
   };
 
   exports.findAllPost = (req, res) => {  
-    post.find()
-    .then( sauces => res.status(200).json(sauces))
+    const title = req.query.title;
+    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  
+    post.findAll()
+      .then(data => {
+        res.send(data);
+      })
+    .then( posts => res.status(200).json(posts))
     .catch( error => res.status(400).json( {error}));
 };
 

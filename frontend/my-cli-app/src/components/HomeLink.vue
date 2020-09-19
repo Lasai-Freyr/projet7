@@ -6,7 +6,9 @@ export default {
 </script>
 
 <template>
-	<a href="./index.html">Accueil</a> 
+	<a href="./index.html">
+		<img src="./images/icon-left-font-monochrome-white.png" alt="logo groupomania" id="logo">
+	</a> 
 </template>
 
 <style>
