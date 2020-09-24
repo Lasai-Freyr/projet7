@@ -4,6 +4,7 @@
     <div>
       <router-view name="newsLine"></router-view>
       <router-view name="Profil"></router-view>
+      <router-view name="Posts"></router-view>
       
 
     </div>

@@ -1,6 +1,12 @@
-const db = require("../models/post.model");
-const post = db.posts;
-//const Op = db.Sequelize.Op;
+const Post = require("../models/Post");
+db = require('../models/index');
+const post = Post.post;
+
+const dbPost = db.posts;
+console.log("db.post");
+console.log(db.posts);
+console.log(post);
+console.log(Post);
 
 exports.createPost = (req, res) => {
    
@@ -16,14 +22,10 @@ exports.createPost = (req, res) => {
 
   };
 
-  exports.findAllPost = (req, res) => {  
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  
-    post.findAll()
-      .then(data => {
-        res.send(data);
-      })
+  exports.findAllPost = (req, res,next) => {  
+    console.log("salut");
+    //res.status(200).send("bonjour à vous");
+    post.find()
     .then( posts => res.status(200).json(posts))
     .catch( error => res.status(400).json( {error}));
 };

@@ -1,9 +1,19 @@
-const userSchema = Schema ({
-    userId: { type: String},
-    email: { type: String, required: true, unique: true},
-    password: { type: String, required: true}
-})
-
-userSchema.plugin(uniqueValidator);
-
-module.exports = model('User', userSchema);
+module.exports = (sequelize, Sequelize) => {
+    const user = sequelize.define("user", {
+        userId: {
+        type: Sequelize.STRING
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+      password: {
+        type: Sequelize.STRING
+      },
+      
+    });
+  
+    return user;
+  };

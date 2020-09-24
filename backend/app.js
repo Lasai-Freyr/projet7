@@ -1,15 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require("helmet");
-const cors = require("cors");
+const sql = require('./models/db');
+
+
 
 const path = require('path');
 
 const dotenv = require('dotenv').config();
 //const rateLimiter = require("./middleware/rateLimiter");
 
-const postsRoutes = require('./app/routes/post.routes.js');
-const userRoutes = require('./app/routes/user.routes.js');
+const postsRoutes = require('./routes/post.js');
+const userRoutes = require('./routes/user.js');
 const { Sequelize } = require('sequelize');
 
 //const sequelize = new Sequelize('database', 'username', 'password', {
@@ -32,7 +34,8 @@ app.use(bodyParser.json());
 app.use('/api/posts', postsRoutes); 
 app.use('/api/auth', userRoutes);
 console.log("bonjour à tous");
-const db = require("./app/models");
+const db = require("./models");
 db.sequelize.sync();
+console.log("123");
 
 module.exports = app;

@@ -5,7 +5,7 @@
       <form class="news-form" @submit.prevent="onSubmit"> 
         <p>
           <label for="name">Quelque chose à dire ? </label> <br>
-          <textarea v-model="text" ></textarea>
+          <input type="text" v-model="text">
         </p>
         <div id="appImg">
           <input type="file" accept="image/*" @change="onFileChange" />

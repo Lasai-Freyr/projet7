@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Profil from '../components/Profil.vue'
 import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
+import Posts from '../components/Posts-component.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,8 @@ const routes = [
     name: 'Home',
     components: {
       default: Home,
-      newsLine: Home
+      newsLine: Home,
+      Posts: Posts
     }
   },
 

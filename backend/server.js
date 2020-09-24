@@ -1,30 +1,20 @@
 const http = require("http");
 const app = require("./app");
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 
 const normalizePort = val =>{
     const port = parseInt(val,10);
 
-if(isNaN(port)){
-    return val;
-}
-if(port>=0){
-    return port;
-}
-return false;
+    if(isNaN(port)){
+        return val;
+    }
+    if(port>=0){
+        return port;
+    }
+    return false;
 };
 
-
-var corsOptions = {
-    origin: "http://localhost:8081"
-  };
-  
-  app.use(cors(corsOptions));
   
   // parse requests of content-type - application/json
-  app.use(bodyParser.json());
 
 const port = normalizePort(process.env.PORT||"8080");
 app.set("port",port);
