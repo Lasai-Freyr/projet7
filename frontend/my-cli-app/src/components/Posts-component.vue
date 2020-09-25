@@ -1,9 +1,14 @@
 <template>
 <div id="app">
   <button v-on:click="updatePost()"> Mettre à jour les posts. </button>
+  <button v-on:click="getOnePost()"> Obtenir un post. </button>
   <ul v-if="posts && posts.length">
     <li v-for="post of posts" v-bind:key="post.id">
       <p><strong>{{post.title}}</strong></p>
+      <p> 
+        {{ post.content }} <br>
+        {{ post.image}}
+      </p>
     </li>
   </ul>
 </div>
@@ -33,6 +38,15 @@ export default {
       })
       .catch(e => {
         this.errors.push(e)
+      })
+    },
+    getOnePost() {
+      axios.get(`http://localhost:8080/api/posts/:id`)
+      .then(response => {
+          console.log(response.data);
+          this.post = response.data;
+        // JSON responses are automatically parsed.
+        //this.posts = response.data
       })
     }
   }
