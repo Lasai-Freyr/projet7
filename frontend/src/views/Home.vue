@@ -2,11 +2,11 @@
   <div id="appForm" class="home">
     <h1> {{ msg }} </h1>  
     <div>
-      <form class="news-form" @submit="checkForm"> 
+      <form class="news-form" @submit="checkForm()"> 
         <p>
           <label for="name">Quelque chose à dire ? </label> <br>
-          <input name="title" id="title" type="text" v-model="text" height="50px"> <br>
-          <input classe="inputText" name="content" id="content" type="text" v-model="text" height="50px">
+          <input name="title" id="title" type="text" v-model="title" height="50px"> <br>
+          <input classe="inputText" name="content" id="content" type="content" v-model="text" height="50px">
         </p>
         <div id="appImg">
           <input type="file" accept="image/*" @change="onFileChange" name="image" id ="image"/>
@@ -14,7 +14,7 @@
             <img v-if="url" :src="url" />
           </div>
         </div>
-        <p> <input type="submit" value="Poster"> </p>
+        <p> <input type="submit" value="Poster" @submit="addPost()"> </p>
       </form>
     </div>
   </div>
@@ -52,11 +52,11 @@
 import axios from 'axios';
 
 export default {
-  name: 'Home',
+  name: "Home",
+  el: '#appForm',
   data() {
     return {
       msg :"Fil d'actualité ",
-      text: null,
       title: null,
       content: null,
       image: null
@@ -65,7 +65,6 @@ export default {
   methods: {
     checkForm() {
       if (this.title && (this.content || this.image)) {
-        return true;
       }
       this.errors = [];
 
@@ -82,13 +81,20 @@ export default {
     }
     },
   addPost() {
+    console.log("salamandre");
+    const form = new FormData();
+    form.append("title", title.value);
+    form.append("content", content.value);
     console.log("axios is posting");
-    axios.post(`http://localhost:8080/api/posts`, {
-      title: title,
-      content: content,
-      image: image,
-      userId: 1
-    })
+    axios.post(`http://localhost:8080/api/posts`, 
+    //  {
+    //    data:{
+    //    title: title,
+    //    content: content,
+    //    image: image,
+    //    userId: 1 }
+    //  }
+    form)
     .then(response => {
         console.log(response.data);
       //  this.posts = response.data;

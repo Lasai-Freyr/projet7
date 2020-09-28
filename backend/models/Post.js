@@ -31,7 +31,7 @@ Post.findAll = (result) => {
     }
 
     console.log("posts : ", res);
-    result(null, res);
+  //  result(null, res);
 });
 }
 

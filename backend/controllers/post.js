@@ -1,12 +1,14 @@
 const Post = require("../models/Post");
 
-exports.createPost = (req, res) => {   
+exports.createPost = (req, res) => {  
+  console.log("pinguin 1"); 
   const postObject = JSON.parse(req.body.post);
   delete postObject.id;
   const post = new Post({
       ...postObject,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   });
+  console.log("pinguin 2"); 
   post.createAPost()
       .then(() => res.status(201).json({ message: 'Post enregistré !'}))
       .catch(error => res.status(400).json({ error }));
