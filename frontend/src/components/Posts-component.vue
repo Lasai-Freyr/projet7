@@ -5,7 +5,7 @@
       <p><strong>{{post.title}}</strong></p>
       <p> 
         {{ post.content }} <br>
-        <img v-bind:src="'@/assets/images/'+ post.image" :alt="post.image"> 
+        <img :src="'/public/images/'+ post.image" :alt="post.image"> 
       </p>
     </li>
   </ul>

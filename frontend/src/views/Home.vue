@@ -2,7 +2,7 @@
   <div id="appForm" class="home">
     <h1> {{ msg }} </h1>  
     <div>
-      <form class="news-form" @submit="checkForm()"> 
+      <form class="news-form" @submit="addPost()"> 
         <p>
           <label for="name">Quelque chose à dire ? </label> <br>
           <input name="title" id="title" type="text" v-model="title" height="50px"> <br>
@@ -53,7 +53,6 @@ import axios from 'axios';
 
 export default {
   name: "Home",
-  el: '#appForm',
   data() {
     return {
       msg :"Fil d'actualité ",
@@ -68,30 +67,24 @@ export default {
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
     }
-    },
-  //addPost() {
-  //  console.log("salamandre");
-  //  const form = new FormData();
-  //  form.append("title", title.value);
-  //  form.append("content", content.value);
-  //  console.log("axios is posting");
-  //  axios.post(`http://localhost:8080/api/posts`, 
-  //  //  {
-  //  //    data:{
-  //  //    title: title,
-  //  //    content: content,
-  //  //    image: image,
-  //  //    userId: 1 }
-  //  //  }
-  //  form)
-  //  .then(response => {
-  //      console.log(response.data);
-  //    //  this.posts = response.data;
-  //    // JSON responses are automatically parsed.
-  //  })
-  //  .catch(e => {
-  //    this.errors.push(e)
-  //  })
-  //}
+    ,
+    addPost() {
+      console.log("salamandre");
+      const form = new FormData();
+      form.append("title", title.value);
+      form.append("content", content.value);
+      form.append("image", image.value);
+      console.log("axios is posting");
+      axios.post(`http://localhost:8080/api/posts`, form)
+      .then(response => {
+          console.log(response.data);
+         this.posts = response.data;
+        // JSON responses are automatically parsed.
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    }
+  }
 }
 </script>

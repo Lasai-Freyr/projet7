@@ -1,18 +1,29 @@
 const Post = require("../models/Post");
 
-//exports.createPost = (req, res) => {  
-//  console.log("pinguin 1"); 
-//  const postObject = JSON.parse(req.body.post);
-//  delete postObject.id;
-//  const post = new Post({
-//      ...postObject,
-//      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-//  });
-//  console.log("pinguin 2"); 
-//  post.createAPost()
-//      .then(() => res.status(201).json({ message: 'Post enregistré !'}))
-//      .catch(error => res.status(400).json({ error }));
-//};
+exports.createPost = (req, res) => {  
+  console.log("pinguin 1"); 
+  console.log(req.body.title);
+  const postObject = req.body;
+  delete postObject.id;
+  if (!req.body.image) {
+    const post = new Post({
+      ...postObject })
+  } else {
+  const post = new Post({
+      ...postObject,      
+      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  })
+};
+  console.log("pinguin 2"); 
+  Post.createAPost((err) => {
+    if (err) {
+      res.status(500).send({message: 'Une erreur s\'est produite'});
+    }
+    else {
+      res.status(200).json({ message: 'Post enregistré !'})
+    }
+  })
+};
 
 exports.findAllPost = (req, res, next) => { 
    console.log("salut salut");

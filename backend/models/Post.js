@@ -9,18 +9,19 @@ const Post = function(post) {
   this.datePost = post.datePost
 }
 
-//Post.creatAPost = (title, content, image) => {
-//  console.log("ajout de post");
-//  sql.query(`INSERT INTO posts values( NOW(), ${title}, 1, ${content}, ${image}, null)`, (err, res) => {
-//    if (err) {
-//      console.log('error: ', err );
-//      result(null, err);
-//      return;
-//    }
-//    console.log("posts ajouté");
-//    result(null, res);
-//  });
-//}
+Post.createAPost = () => {
+  console.log("ajout de post");
+  console.log();
+  sql.query(`INSERT INTO posts values( NOW(), ${title}, 1, ${content}, ${image}, null)`, (err, res) => {
+    if (err) {
+      console.log('error: ', err );
+        result(null, err);
+      return;
+    }
+    console.log("posts ajouté");
+    result(null, res);
+  });
+}
 
 Post.findAll = (result) => {
   sql.query('SELECT * FROM posts ORDER BY datePost DESC', (err, res) => {
