@@ -53,14 +53,18 @@ exports.findOnePost = (req, res) => {
 }
 
 exports.deletePost = (req, res, next) => {
-  Post.findByPk({ id: req.body.id })
-    .then(post => {
-      const filename = post.image.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.body.id })
-          .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
-          .catch(error => res.status(400).json({ error }));
-      });
-    })
-    .catch(error => res.status(500).json({ error }));
-};
+  //Post.findByPk({ id: req.body.id })
+      //const filename = post.image.split('/images/')[1];
+      //fs.unlink(`images/${filename}`, () => {
+  //console.log(req.body.id);
+  Post.deleteOnePost({ id: req.body.id },(err) => {
+    //console.log(id);
+    if (err)  {
+      res.status(400).send({message: 'Une erreur s\'est produite en supprimant'});
+    } 
+    else {
+      res.status(200).send({ message: 'Objet supprimé !'});
+    }
+  })
+}
+    

@@ -48,4 +48,16 @@ Post.findByPk = (id, result) => {
   })
 }
 
+Post.deleteOnePost = (id, result) => {
+  sql.query(`DELETE FROM posts WHERE id=${id}`, (err, res) => {
+    if (err) {
+      console.log('error: ', err);
+      result(null, err);
+      return;
+    }
+    console.log("post supprimé");
+    result(null, res);
+  });
+}
+
 module.exports = Post;

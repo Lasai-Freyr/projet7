@@ -2,12 +2,14 @@
 <div id="app">
   <ul v-if="posts && posts.length">
     <li v-for="post of posts" v-bind:key="post.id">
-      <button @click="DeletePost()">X</button>
-      <p><strong>{{post.title}}</strong></p>
-      <p> 
-        {{ post.content }} <br>
-        <img :src="'/public/images/'+ post.image" :alt="post.image"> 
-      </p>
+      <router-link :to="{name: 'Post'}">
+        <button @click="DeletePost()">X</button>
+        <p><strong>{{post.title}}</strong></p>
+        <p> 
+          {{ post.content }}  <br>
+          <img :src="'/public/images/'+ post.image" :alt="post.image"> 
+        </p>
+      </router-link>
     </li>
   </ul>
 </div>
@@ -39,11 +41,10 @@ export default {
       this.errors.push(e)
     })
   },
-    DeletePost() {
+    DeletePost(id) {
       console.log("axios del post");
-      axios.delete(`http://localhost:8080/api/posts/`)
+      axios.delete(`http://localhost:8080/api/posts/:${id}`)
     }
-  
     //getOnePost() {
     //  axios.get(`http://localhost:8080/api/posts/:id`)
     //  .then(response => {
