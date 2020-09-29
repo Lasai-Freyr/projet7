@@ -9,18 +9,18 @@ exports.createPost = (req, res) => {
     const post = new Post({
       ...postObject })
   } else {
-  const post = new Post({
+      const post = new Post({
       ...postObject,      
-      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      image: `${req.protocol}://${req.get('host')}/images/${req.body.image}`
   })
 };
   console.log("pinguin 2"); 
-  Post.createAPost((err) => {
+  Post.createAPost(postObject,(err) => {
     if (err) {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     }
     else {
-      res.status(200).json({ message: 'Post enregistré !'})
+      res.status(200).send({ message: 'Post enregistré !'})
     }
   })
 };
@@ -51,3 +51,16 @@ exports.findOnePost = (req, res) => {
   }
   })
 }
+
+exports.deletePost = (req, res, next) => {
+  Post.findByPk({ id: req.body.id })
+    .then(post => {
+      const filename = post.image.split('/images/')[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.deleteOne({ _id: req.body.id })
+          .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+          .catch(error => res.status(400).json({ error }));
+      });
+    })
+    .catch(error => res.status(500).json({ error }));
+};

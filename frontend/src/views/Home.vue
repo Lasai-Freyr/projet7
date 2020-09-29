@@ -58,7 +58,8 @@ export default {
       msg :"Fil d'actualité ",
       title: null,
       content: null,
-      image: null
+      image: null,
+      form: null
     }
   },
   methods: {
@@ -75,10 +76,9 @@ export default {
       form.append("content", content.value);
       form.append("image", image.value);
       console.log("axios is posting");
-      axios.post(`http://localhost:8080/api/posts`, form)
+      axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' })
       .then(response => {
           console.log(response.data);
-         this.posts = response.data;
         // JSON responses are automatically parsed.
       })
       .catch(e => {

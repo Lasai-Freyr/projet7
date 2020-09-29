@@ -6,6 +6,7 @@ const dotenv = require('dotenv').config();
 //const rateLimiter = require("./middleware/rateLimiter");
 
 const postsRoutes = require('./routes/post.js');
+const commentairesRoutes = require('./routes/commentaires.js');
 const userRoutes = require('./routes/user.js');
 
 const app = express();
@@ -19,8 +20,9 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-//app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/posts', postsRoutes); 
+app.use('/api/commentaires', commentairesRoutes);
 app.use('/api/auth', userRoutes);
 console.log("123");
 

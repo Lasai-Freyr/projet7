@@ -9,10 +9,10 @@ const Post = function(post) {
   this.datePost = post.datePost
 }
 
-Post.createAPost = () => {
+Post.createAPost = (postObject,result) => {
   console.log("ajout de post");
-  console.log();
-  sql.query(`INSERT INTO posts values( NOW(), ${title}, 1, ${content}, ${image}, null)`, (err, res) => {
+  console.log(postObject);
+  sql.query(`INSERT INTO posts values( NOW(), "${postObject.title}", 1, "${postObject.content}", "${postObject.image}", null)`, (err, res) => {
     if (err) {
       console.log('error: ', err );
         result(null, err);
