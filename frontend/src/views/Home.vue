@@ -63,46 +63,35 @@ export default {
     }
   },
   methods: {
-    checkForm() {
-      if (this.title && (this.content || this.image)) {
-      }
-      this.errors = [];
-
-      if (!this.title) {
-        this.errors.push('titre requis.');
-      }
-      else {
-        this.errors.push('Aucun contenu à poster');
-      } 
-    },
+    
     onFileChange(e) {
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
     }
     },
-  addPost() {
-    console.log("salamandre");
-    const form = new FormData();
-    form.append("title", title.value);
-    form.append("content", content.value);
-    console.log("axios is posting");
-    axios.post(`http://localhost:8080/api/posts`, 
-    //  {
-    //    data:{
-    //    title: title,
-    //    content: content,
-    //    image: image,
-    //    userId: 1 }
-    //  }
-    form)
-    .then(response => {
-        console.log(response.data);
-      //  this.posts = response.data;
-      // JSON responses are automatically parsed.
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
-  }
+  //addPost() {
+  //  console.log("salamandre");
+  //  const form = new FormData();
+  //  form.append("title", title.value);
+  //  form.append("content", content.value);
+  //  console.log("axios is posting");
+  //  axios.post(`http://localhost:8080/api/posts`, 
+  //  //  {
+  //  //    data:{
+  //  //    title: title,
+  //  //    content: content,
+  //  //    image: image,
+  //  //    userId: 1 }
+  //  //  }
+  //  form)
+  //  .then(response => {
+  //      console.log(response.data);
+  //    //  this.posts = response.data;
+  //    // JSON responses are automatically parsed.
+  //  })
+  //  .catch(e => {
+  //    this.errors.push(e)
+  //  })
+  //}
 }
 </script>

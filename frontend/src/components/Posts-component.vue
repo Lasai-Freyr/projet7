@@ -5,7 +5,7 @@
       <p><strong>{{post.title}}</strong></p>
       <p> 
         {{ post.content }} <br>
-        <img :src="postImage(post.image)"> 
+        <img v-bind:src="'@/assets/images/'+ post.image" :alt="post.image"> 
       </p>
     </li>
   </ul>
@@ -24,11 +24,7 @@ export default {
       errors: []
     } 
   },
-  methods: {
-    postImage() {
-    return './assets/images/'+this.image;
-    }
-  },
+  
   mounted(){    
     console.log("axios is getting");
     axios.get(`http://localhost:8080/api/posts`)
@@ -36,7 +32,7 @@ export default {
         console.log(response.data);
         this.posts = response.data;
       // JSON responses are automatically parsed.
-      //this.posts = response.data
+      this.posts = response.data
     })
     .catch(e => {
       this.errors.push(e)
