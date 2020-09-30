@@ -2,12 +2,12 @@
 <div id="app">
   <ul v-if="posts && posts.length">
     <li v-for="post of posts" v-bind:key="post.id">
-      <router-link :to="{name: 'Post'}">
-        <button @click="DeletePost()">X</button>
+      <router-link :to="{name: 'Post', params:post, id:post.id}">
+        <p class="user">{{post.name}} :</p>
         <p><strong>{{post.title}}</strong></p>
         <p> 
           {{ post.content }}  <br>
-          <img :src="'/public/images/'+ post.image" :alt="post.image"> 
+          <img :src="`./assets/images/${post.image}`" :alt="post.image"> 
         </p>
       </router-link>
     </li>
@@ -27,15 +27,20 @@ export default {
       errors: []
     } 
   },
+  methods: {
+    getImage(image) {
+      return "../../../backend/images/"+image;
+    }
+  },
   
   mounted(){    
     console.log("axios is getting");
     axios.get(`http://localhost:8080/api/posts`)
     .then(response => {
-        console.log(response.data);
+      //  console.log(response.data);
         this.posts = response.data;
       // JSON responses are automatically parsed.
-      this.posts = response.data
+      //this.posts = response.data
     })
     .catch(e => {
       this.errors.push(e)
@@ -45,6 +50,7 @@ export default {
       console.log("axios del post");
       axios.delete(`http://localhost:8080/api/posts/:${id}`)
     }
+}
     //getOnePost() {
     //  axios.get(`http://localhost:8080/api/posts/:id`)
     //  .then(response => {
@@ -55,7 +61,7 @@ export default {
     //  })
     //}
   //}
-}
+
 </script>
 
 <style lang="scss">
@@ -75,5 +81,8 @@ export default {
   }
   img {
     width: 100px;
+  }
+  .user {
+    text-align: left;
   }
 </style>

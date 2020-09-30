@@ -5,7 +5,7 @@
                 <img src="../assets/images/icon-left-font-monochrome-white2.png" alt="logo groupomania" id="logo">
             </div>            
             <nav>        
-            <router-link :to="{name: 'Home'}">Home</router-link> |
+            <router-link :to="{name: 'Home'}">Home</router-link> 
             <router-link :to="{name: 'Profil'}">Profil</router-link>
             </nav>
         </div>
@@ -28,6 +28,7 @@ export default {}
     nav {
         display: flex;
         justify-content: flex-end;
+        padding-right: 10px;
         margin-right: 10px;
         margin-bottom: 10px;
     }  

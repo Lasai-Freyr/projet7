@@ -6,10 +6,10 @@
         <p>
           <label for="name">Quelque chose à dire ? </label> <br>
           <input name="title" id="title" type="text" v-model="title" height="50px"> <br>
-          <input classe="inputText" name="content" id="content" type="content" v-model="text" height="50px">
+          <input classe="inputText" name="content" id="content" type="content" v-model="content" height="50px">
         </p>
         <div id="appImg">
-          <input type="file" accept="image/*" @change="onFileChange" name="image" id ="image"/>
+          <input type="file" accept="image/*" @change="onFileSelected" name="image" id ="image">
           <div id="preview">
             <img v-if="url" :src="url" />
           </div>
@@ -59,26 +59,34 @@ export default {
       title: null,
       content: null,
       image: null,
-      form: null
+      form: null,
+      SelectedFile: null
     }
   },
   methods: {
     
-    onFileChange(e) {
-      const file = e.target.files[0];
-      this.url = URL.createObjectURL(file);
-    }
-    ,
+    onFileSelected(e) {
+      this.SelectedFile = e.target.files[0];
+      //this.url = URL.createObjectURL(file);
+    },
+    onUpload() {
+
+    },
     addPost() {
       console.log("salamandre");
+      var path = `C:\\fakepath\\${image.value}`;
+      var filename = path.replace(/^.*\\/, "");
+      console.log(filename);
       const form = new FormData();
       form.append("title", title.value);
       form.append("content", content.value);
-      form.append("image", image.value);
+      form.append("imageFile", this.SelectedFile);
+      form.append("image", filename);
       console.log("axios is posting");
       axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' })
       .then(response => {
-          console.log(response.data);
+        //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
+        //  console.log(response.data);
         // JSON responses are automatically parsed.
       })
       .catch(e => {

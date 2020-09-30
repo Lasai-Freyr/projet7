@@ -2,6 +2,7 @@ const Post = require("../models/Post");
 
 exports.createPost = (req, res) => {  
   console.log("pinguin 1"); 
+  console.log(req.body.image);
   console.log(req.body.title);
   const postObject = req.body;
   delete postObject.id;
@@ -11,7 +12,7 @@ exports.createPost = (req, res) => {
   } else {
       const post = new Post({
       ...postObject,      
-      image: `${req.protocol}://${req.get('host')}/images/${req.body.image}`
+      image: `${req.body.image}`
   })
 };
   console.log("pinguin 2"); 
@@ -20,7 +21,7 @@ exports.createPost = (req, res) => {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     }
     else {
-      res.status(200).send({ message: 'Post enregistré !'})
+      res.status(201).send({ message: 'Post enregistré !'})
     }
   })
 };
@@ -38,26 +39,29 @@ exports.findAllPost = (req, res, next) => {
   })
 };
 
-exports.findOnePost = (req, res) => {
-  const id = req.params.id;
-  console.log("salut salut");
+exports.findOnePost = (req, res, next) => {
+ console.log(req.params.id);
+  id = req.params.id;
+  console.log("salution");
   //res.status(200).send("bonjour à vous pinguin");
   Post.findByPk(id,(err, data) => {
   if (err) {
     res.status(500).send({message: 'Une erreur s\'est produite'});
   } 
   else { console.log(data);
+   console.log("data");
     res.status(200).send(data)
   }
   })
 }
 
 exports.deletePost = (req, res, next) => {
-  //Post.findByPk({ id: req.body.id })
+  const id = req.params.id;
+  //Post.findByPk(id)
       //const filename = post.image.split('/images/')[1];
       //fs.unlink(`images/${filename}`, () => {
   //console.log(req.body.id);
-  Post.deleteOnePost({ id: req.body.id },(err) => {
+  Post.deleteOnePost(id,(err) => {
     //console.log(id);
     if (err)  {
       res.status(400).send({message: 'Une erreur s\'est produite en supprimant'});

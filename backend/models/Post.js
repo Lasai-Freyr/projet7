@@ -24,31 +24,32 @@ Post.createAPost = (postObject,result) => {
 }
 
 Post.findAll = (result) => {
-  sql.query('SELECT * FROM posts ORDER BY datePost DESC', (err, res) => {
+  sql.query('SELECT datePost, title, posts.id, userId, content, image, name  FROM posts INNER JOIN users on posts.userId = users.id ORDER BY datePost DESC', (err, res) => {
     if (err) {
       console.log('error: ', err );
       result(null, err);
       return;
     }
 
-    console.log("posts : ", res);
+  //  console.log("posts : ", res);
     result(null, res);
 });
 }
 
 Post.findByPk = (id, result) => {
-  sql.query(`SELECT * FROM posts where id=${id}`, (err, res) =>{
+  console.log(id);
+  sql.query(`SELECT datePost, title, posts.id, userId, content, image, name  FROM posts INNER JOIN users on posts.userId = users.id WHERE posts.id = ${id};`, (err, res) => {
     if (err) {
       console.log('error: ', err );
       result(null, err);
       return;
     }
-    console.log("post : ", res);
     result(null, res);
   })
 }
 
 Post.deleteOnePost = (id, result) => {
+  console.log(id);
   sql.query(`DELETE FROM posts WHERE id=${id}`, (err, res) => {
     if (err) {
       console.log('error: ', err);
