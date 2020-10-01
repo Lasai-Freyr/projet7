@@ -6,6 +6,7 @@ import Post from '../components/Post.vue'
 import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
 import Posts from '../components/Posts-component.vue'
+import Commentaires from '../components/Commentaires-components.vue'
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,8 @@ const routes = [
     path: `/posts/:id`,
     name: 'Post',
     components: {
-      Post: Post
+      Post: Post,
+      commentaires: Commentaires
     }
   },
 

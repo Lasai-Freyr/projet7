@@ -30,7 +30,6 @@ Post.findAll = (result) => {
       result(null, err);
       return;
     }
-
   //  console.log("posts : ", res);
     result(null, res);
 });

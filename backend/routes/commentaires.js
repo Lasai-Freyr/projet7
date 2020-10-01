@@ -6,7 +6,7 @@ const comCtrl = require('../controllers/commentaires.js');
 router.get('/', comCtrl.findAllCommentaires);
 //router.get('/:id', comCtrl.findOneCommentaire);
 //router.put('/:id', comCtrl.modifySauce);  
-//router.delete('/:id', comCtrl.deleteSauce);
-//router.post('/', comCtrl.createCommentaire);
+router.delete('/:id', comCtrl.deleteCommentaire);
+router.post('/', comCtrl.createCommentaire);
 
 module.exports = router;

@@ -69,29 +69,27 @@ export default {
       this.SelectedFile = e.target.files[0];
       //this.url = URL.createObjectURL(file);
     },
-    onUpload() {
-
-    },
     addPost() {
-      console.log("salamandre");
-      var path = `C:\\fakepath\\${image.value}`;
-      var filename = path.replace(/^.*\\/, "");
-      console.log(filename);
-      const form = new FormData();
-      form.append("title", title.value);
-      form.append("content", content.value);
-      form.append("imageFile", this.SelectedFile);
-      form.append("image", filename);
-      console.log("axios is posting");
-      axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' })
-      .then(response => {
-        //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
-        //  console.log(response.data);
-        // JSON responses are automatically parsed.
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+        console.log("salamandre");
+        var path = `C:\\fakepath\\${image.value}`;
+        var filename = path.replace(/^.*\\/, "");
+        console.log(filename);
+        const form = new FormData();
+        form.append("title", title.value);
+        form.append("content", content.value);
+        form.append("imageFile", this.SelectedFile);
+        form.append("image", filename);
+        console.log("axios is posting");
+        console.log(form);
+        axios.post(`http://localhost:8080/api/posts`, content, {'Content-Type': 'multipart/form-data' })
+        .then(response => {
+          //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
+          //  console.log(response.data);
+          // JSON responses are automatically parsed.
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     }
   }
 }

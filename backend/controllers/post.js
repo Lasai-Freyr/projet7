@@ -3,7 +3,6 @@ const Post = require("../models/Post");
 exports.createPost = (req, res) => {  
   console.log("pinguin 1"); 
   console.log(req.body.image);
-  console.log(req.body.title);
   const postObject = req.body;
   delete postObject.id;
   if (!req.body.image) {
@@ -33,7 +32,7 @@ exports.findAllPost = (req, res, next) => {
   if (err) {
     res.status(500).send({message: 'Une erreur s\'est produite'});
   } 
-  else { console.log(data);
+  else { //console.log(data);
     res.status(200).send(data)
   }
   })

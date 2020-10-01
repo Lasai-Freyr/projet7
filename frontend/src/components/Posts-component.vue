@@ -48,20 +48,10 @@ export default {
   },
     DeletePost(id) {
       console.log("axios del post");
-      axios.delete(`http://localhost:8080/api/posts/:${id}`)
+      axios.delete(`http://localhost:8080/api/posts/${id}`)
     }
 }
-    //getOnePost() {
-    //  axios.get(`http://localhost:8080/api/posts/:id`)
-    //  .then(response => {
-    //      console.log(response.data);
-    //      this.post = response.data;
-    //    // JSON responses are automatically parsed.
-    //    //this.posts = response.data
-    //  })
-    //}
-  //}
-
+   
 </script>
 
 <style lang="scss">
