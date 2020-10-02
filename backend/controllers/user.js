@@ -38,11 +38,14 @@ exports.login = (req, res, next) => {
     }
     console.log("vérif mot de passe");
     console.log(req.body.password);
+    console.log(user.password);
+    console.log("***********");
     
     console.log("data", data);  
-    console.log(data.body); 
-    console.log(data.TextRow);
-    bcrypt.compare(res.body.password, user.password)
+    const userData = data[0];
+    console.log(userData);
+    console.log(userData.password);
+    bcrypt.compare( user.password, userData.password)
     .then(valid => {
         if (!valid) {
           console.log("mdp faux");
