@@ -1,32 +1,53 @@
 <template>
-  <div class="Login">
-    <div>
-      <h1> Bienvenue sur Groupomania </h1>
-      <h2> Merci de vous connecter </h2>
-      <section>
-        <form [formGroup]="loginForm" *ngIf="!loading">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" formControlName="email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" formControlName="password">
-  </div>
-  <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onLogin()">LOGIN</button>
-  <p class="text-danger" *ngIf="errorMsg">{{ errorMsg }}</p>
-</form>
-      </section>
-    </div>
-  </div>
+  <div id="app" class="Login">
+    <form id="appForm" class="form_user"  @submit="findUser()">
+      <div class="form-group">
+        <label for="address">Adresse mail :</label>
+        <input type="email" class="form-control" id="address" name="address" formControlName="address" v-model="address">
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" v-model="password">
+      </div>
+      <input type="submit" value="Créer son compte" @click="findUser()">
+    </form>
+  </div>    
 </template>
 
-<script>
-export default {
-  name: "Profil",
-  data() {
-    return 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
+<script>
+import axios from 'axios';
+
+export default {
+  name: "Login",
+  data() {
+    return {
+      address: null,
+      password: null,
+      form: null
+    }
+  },
+  methods: {
+    findUser() {
+      console.log(this.address);
+      console.log("addUser");
+      const body = {"address": this.address, "password": password.value};
+      console.log(body);
+      axios.post(`http://localhost:8080/api/auth/Login`, body, {'Content-Type': 'multipart/form-data' })
+      .then(response => {
+        //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
+        //  console.log(response.data);
+        // JSON responses are automatically parsed.
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    }
   }
 }
 </script>
+
+<style>
+
+</style>

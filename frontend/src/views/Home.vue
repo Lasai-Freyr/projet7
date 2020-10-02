@@ -67,7 +67,7 @@ export default {
     
     onFileSelected(e) {
       this.SelectedFile = e.target.files[0];
-      //this.url = URL.createObjectURL(file);
+      this.url = URL.createObjectURL(file);
     },
     addPost() {
         console.log("salamandre");
@@ -81,7 +81,7 @@ export default {
         form.append("image", filename);
         console.log("axios is posting");
         console.log(form);
-        axios.post(`http://localhost:8080/api/posts`, content, {'Content-Type': 'multipart/form-data' })
+        axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' })
         .then(response => {
           //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
           //  console.log(response.data);

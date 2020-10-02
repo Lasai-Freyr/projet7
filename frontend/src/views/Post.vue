@@ -17,9 +17,8 @@ import axios from 'axios';
 import Commentaires from '@/components/Commentaires-components.vue'
     export default {
         name:"Post",
-        el: "#app",
         components: {
-      Commentaires
+        Commentaires
     },
     data() {
         return {

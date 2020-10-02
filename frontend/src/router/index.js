@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
-import Profil from '../components/Profil.vue'
-import Post from '../components/Post.vue'
+import Profil from '../views/Profil.vue'
+import Post from '../views/Post.vue'
 import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
 import Posts from '../components/Posts-component.vue'
@@ -34,17 +34,15 @@ const routes = [
     path: '/Login',
     name: 'Login',
     components: {
-      default: Login,
-      newsLine: Login
+      Login: Login,
     }
   },
  
   {
-    path: '/Signup',
+    path: '/signup',
     name: 'Signup',
     components: {
-      default: Signup,
-      newsLine: Signup
+      Signup: Signup,
     }
   },
  

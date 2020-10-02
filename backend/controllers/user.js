@@ -1,46 +1,66 @@
 const bcrypt = require('bcrypt');
-const  User = require('../models/User.js');
-const user = User.users;
+const  User = require('../models/User');
 //const Op = db.Sequelize.Op;
 
 
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
+  console.log("kilua");
+  console.log(req.body.name);
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
+      console.log("Gon");
       const user = new User({
-        email: req.body.email,
-        password: hash
+        address: req.body.address,
+        password: hash,
+        name: req.body.name
       });
-      user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch(error => res.status(409).json({ message: "cet utilisateur existe déjà" }))
-    .catch(error =>  res.status(500).json({ error }))
-    })
-}; 
+      User.saveUser(user, (err) => {
+        if (err) {
+          res.status(500).send({message: 'Une erreur s\'est produite'});
+        }
+        else {
+          res.status(201).send({ message: 'Post enregistré !'})
+        }
+      })
+  } )  
+}
+  
 
-  exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })
-      .then(user => {
-        if (!user) {
-          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-        }
-        bcrypt.compare(req.body.password, user.password)
-        .then(valid => {
-            if (!valid) {
-              return res.status(401).json({ error: 'Mot de passe incorrect !' });
-        }
-        res.status(200).json({
-            userId: user._id,
-            token: jwt.sign(
-              { userId: user._id},
-              'RANDOM TOKEN_SECRET',
-              { expiresIn: '24h' }            
-              )
-            });
-        })
-    .catch(error => res.status(500).json({ error }));
+exports.login = (req, res, next) => {
+  const user = req.body;
+  const userAd = req.body.address;
+  console.log("req.body", req.body);
+  User.findUser(userAd,(err,data) => {
+    if (!userAd) {
+      return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+    }
+    console.log("vérif mot de passe");
+    console.log(req.body.password);
+    
+    console.log("data", data);  
+    console.log(data.body); 
+    console.log(data.TextRow);
+    bcrypt.compare(res.body.password, user.password)
+    .then(valid => {
+        if (!valid) {
+          console.log("mdp faux");
+          return res.status(401).json({ error: 'Mot de passe incorrect !' });
+    }
+    console.log("mdp correct");
+    res.status(200).json({
+        userId: user.id,
+        token: jwt.sign(
+          { userId: user.id},
+          'RANDOM TOKEN_SECRET',
+          { expiresIn: '24h' }            
+          )
+        });
     })
-    .catch(error => res.status(500).json({ error }));
-  };
+    if (err) {
+      res.status(500).json({ error });          
+    }
+  });
+}
+    

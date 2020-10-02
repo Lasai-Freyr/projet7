@@ -7,6 +7,8 @@
             <nav>        
             <router-link :to="{name: 'Home'}">Home</router-link> 
             <router-link :to="{name: 'Profil'}">Profil</router-link>
+            <router-link :to="{name: 'Signup'}">Créer un compte</router-link>
+            <router-link :to="{name: 'Login'}">Se connecter</router-link>
             </nav>
         </div>
     </header>
@@ -31,5 +33,9 @@ export default {}
         padding-right: 10px;
         margin-right: 10px;
         margin-bottom: 10px;
-    }  
+    }
+    a{
+        margin-right: 10px;
+        margin-bottom: 5px;
+    } 
 </style>

@@ -6,7 +6,8 @@
       <router-view name="Profil"></router-view>
       <router-view name="Posts"></router-view>
       <router-view name="Post"></router-view>
-
+      <router-view name="Signup"></router-view>
+      <router-view name="Login"></router-view>
     </div>
   </div>
 
@@ -20,10 +21,7 @@
     name: "app",
     components: {
       Header
-    },
-    mounted() {
-    
-  }
+    }
   }
   </script>
 

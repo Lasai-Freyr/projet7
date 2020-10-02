@@ -14,8 +14,8 @@
                 <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
                      <button @click="DeleteCommentaire(commentaire.id)">X</button>
                     <p class="user">{{commentaire.name}} :</p>
-                    <p> {{ commentaire.content }}  <br>
-                    </p>
+                    <p> {{ commentaire.content }}</p>
+                    <p> posté le {{ commentaire.dateCommentaire}}. </p>
                 </li>
             </ul>
         </div>
