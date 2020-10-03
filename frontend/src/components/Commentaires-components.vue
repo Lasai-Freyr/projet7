@@ -63,10 +63,11 @@ export default {
                 this.errors.push(e)
             })            
         },
-         DeleteCommentaire() {
+         DeleteCommentaire(commentId) {
+             console.log(commentId);
             console.log("axios del com");
-            axios.delete(`http://localhost:8080/api/commentaires/${commentaire.id}`)
-    } 
+            axios.delete(`http://localhost:8080/api/commentaires/${commentId}`)
+        } 
     }
 }
 </script>

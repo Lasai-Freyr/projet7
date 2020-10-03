@@ -6,7 +6,7 @@
         <p>
           <label for="name">Quelque chose à dire ? </label> <br>
           <input name="title" id="title" type="text" v-model="title" height="50px"> <br>
-          <input classe="inputText" name="content" id="content" type="content" v-model="content" height="50px">
+          <input classe="inputText" name="content" id="content" type="content" v-model="content">
         </p>
         <div id="appImg">
           <input type="file" accept="image/*" @change="onFileSelected" name="image" id ="image">
@@ -16,6 +16,9 @@
         </div>
         <p> <input type="submit" value="Poster" @submit="addPost()"> </p>
       </form>
+    </div>
+    <div>
+      <Posts></Posts>
     </div>
   </div>
 </template>
@@ -33,7 +36,7 @@
   max-height: 500px;
 }
 
-#appForm {
+.news-form {
   border: 1px solid grey;
   width: 50%;
   display: inline-flex;
@@ -41,18 +44,27 @@
   flex-direction: column;
 }
 
-.inputText {
-  size: 140px;
-  height: 50px;
+#title{
+  width: 300px;
+}
+
+#content {
+  margin-top: 10px;
+  width: 400px;
+  height: 120px;
 }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
 import axios from 'axios';
+import Posts from '@/components/Posts-component.vue'
 
 export default {
   name: "Home",
+  components: {
+        Posts
+    },
   data() {
     return {
       msg :"Fil d'actualité ",

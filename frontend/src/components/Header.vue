@@ -5,7 +5,7 @@
                 <img src="../assets/images/icon-left-font-monochrome-white2.png" alt="logo groupomania" id="logo">
             </div>            
             <nav>        
-            <router-link :to="{name: 'Home'}">Home</router-link> 
+            <router-link :to="{name: 'Home'}">Fil d'actualité</router-link> 
             <router-link :to="{name: 'Profil'}">Profil</router-link>
             <router-link :to="{name: 'Signup'}">Créer un compte</router-link>
             <router-link :to="{name: 'Login'}">Se connecter</router-link>

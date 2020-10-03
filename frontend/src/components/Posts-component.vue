@@ -7,7 +7,7 @@
         <p><strong>{{post.title}}</strong></p>
         <p> 
           {{ post.content }}  <br>
-          <img :src="`./assets/images/${post.image}`" :alt="post.image"> 
+          <img :src="`/images/${post.image}`" :alt="post.image"> 
         </p>
       </router-link>
     </li>
@@ -26,13 +26,7 @@ export default {
       posts: [],
       errors: []
     } 
-  },
-  methods: {
-    getImage(image) {
-      return "../../../backend/images/"+image;
-    }
-  },
-  
+  },  
   mounted(){    
     console.log("axios is getting");
     axios.get(`http://localhost:8080/api/posts`)
@@ -45,11 +39,7 @@ export default {
     .catch(e => {
       this.errors.push(e)
     })
-  },
-    DeletePost(id) {
-      console.log("axios del post");
-      axios.delete(`http://localhost:8080/api/posts/${id}`)
-    }
+  }
 }
    
 </script>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Profil from '../views/Profil.vue'
 import Post from '../views/Post.vue'
+import Auth from '../views/Auth.vue'
 import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
 import Posts from '../components/Posts-component.vue'
@@ -13,6 +14,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Auth',
+    components: {
+      Auth: Auth
+    }
+  },
+
+  {
+    path: '/posts',
     name: 'Home',
     components: {
       default: Home,

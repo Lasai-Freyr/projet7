@@ -2,14 +2,14 @@
   <div id="app" class="Login">
     <form id="appForm" class="form_user"  @submit="findUser()">
       <div class="form-group">
-        <label for="address">Adresse mail :</label>
+        <label for="address">Adresse mail : </label>
         <input type="email" class="form-control" id="address" name="address" formControlName="address" v-model="address">
       </div>
       <div class="form-group">
-        <label for="password">Mot de passe</label>
+        <label for="password">Mot de passe : </label>
         <input type="password" id="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Créer son compte" @click="findUser()">
+      <input type="submit" value="Se connecter" @click="findUser()">
     </form>
   </div>    
 </template>
@@ -49,5 +49,7 @@ export default {
 </script>
 
 <style>
-
+  .form-group {
+    margin: 5px;
+  }
 </style>

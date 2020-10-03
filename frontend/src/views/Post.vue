@@ -21,12 +21,9 @@ import Commentaires from '@/components/Commentaires-components.vue'
         Commentaires
     },
     data() {
-        return {
-           
-            post: {},
-            
-            error: null
-        
+        return {           
+            post: {},            
+            error: null        
         } 
     },
     methods: {

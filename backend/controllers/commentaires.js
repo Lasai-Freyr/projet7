@@ -23,7 +23,7 @@ exports.createCommentaire = ( req, res, next) => {
   ...comObject
   });
   console.log("pinguin 2"); 
-  Commentaires.createACom(id, comObject,(err) => {
+  Commentaires.createACom(commentId, comObject,(err) => {
     if (err) {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     }
@@ -34,7 +34,8 @@ exports.createCommentaire = ( req, res, next) => {
 }
 
 exports.deleteCommentaire = (req, res, next) => {
-  Commentaires.deleteOneCommentaire(id,(err) => {
+  const commentId = req.params.id;
+  Commentaires.deleteOneCommentaire(commentId,(err) => {
     //console.log(id);
     if (err)  {
       res.status(400).send({message: 'Une erreur s\'est produite en supprimant'});

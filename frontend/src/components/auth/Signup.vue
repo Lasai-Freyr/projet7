@@ -2,15 +2,15 @@
   <div id="app" class="Signup">
     <form id="appForm" class="form_user"  @submit="addUser()">
           <div class="form-group">
-        <label for="name">Nom :</label>
+        <label for="name">Nom : </label>
         <input type="text" id="name" v-model="name" name="name" class="form-control">
       </div>
       <div class="form-group">
-        <label for="address">Adresse mail :</label>
+        <label for="address">Adresse mail : </label>
         <input type="email" class="form-control" id="address" name="address" formControlName="address" v-model="address">
       </div>
       <div class="form-group">
-        <label for="password">Mot de passe</label>
+        <label for="password">Mot de passe : </label>
         <input type="password" id="password" name="password" v-model="password">
       </div>
       <input type="submit" value="Créer son compte" @click="addUser()">
@@ -54,5 +54,7 @@ export default {
 </script>
 
 <style>
-
+  .form-group {
+    margin: 5px;
+  }
 </style>

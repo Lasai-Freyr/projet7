@@ -8,6 +8,7 @@
       <router-view name="Post"></router-view>
       <router-view name="Signup"></router-view>
       <router-view name="Login"></router-view>
+       <router-view name="Auth"></router-view>
     </div>
   </div>
 

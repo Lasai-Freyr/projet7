@@ -11,8 +11,7 @@ exports.createPost = (req, res) => {
   } else {
       const post = new Post({
       ...postObject,      
-      image: `${req.body.image}`
-  })
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  })
 };
   console.log("pinguin 2"); 
   Post.createAPost(postObject,(err) => {

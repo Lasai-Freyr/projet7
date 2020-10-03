@@ -35,9 +35,8 @@ Commentaires.createACom = (id, comObject, result) => {
   });
 }
 
-Commentaires.deleteOneCommentaire = (id, result) => {
-  console.log(id);
-  sql.query(`DELETE FROM commentaires WHERE id=${id}`, (err, res) => {
+Commentaires.deleteOneCommentaire = (commentId, result) => {
+  sql.query(`DELETE FROM commentaires WHERE id=${commentId}`, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);
