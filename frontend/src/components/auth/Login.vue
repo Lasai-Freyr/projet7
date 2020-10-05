@@ -32,7 +32,7 @@ export default {
     findUser() {
       console.log(this.address);
       console.log("addUser");
-      const body = {"address": this.address, "password": password.value};
+      const body = {"address": this.address, "password": this.password};
       console.log(body);
       axios.post(`http://localhost:8080/api/auth/Login`, body, {'Content-Type': 'multipart/form-data' })
       .then(response => {

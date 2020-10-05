@@ -3,7 +3,6 @@
         <div>
             <button v-on:click="log = false"> Créer un compte</button>
             <button v-on:click="log = true">Se connecter</button>
-            <p> dsfsdfsdfsdfsdf </p>
         </div>
          <div v-show="!log">
              <Signup></Signup>
