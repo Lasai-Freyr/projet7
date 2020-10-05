@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="Signup">
-    <form id="appForm" class="form_user"  @submit="addUser()">
+    <form id="appForm" class="form_user" >
           <div class="form-group">
         <label for="name">Nom : </label>
         <input type="text" id="name" v-model="name" name="name" class="form-control">
@@ -13,7 +13,7 @@
         <label for="password">Mot de passe : </label>
         <input type="password" id="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Créer son compte" @click="addUser()">
+      <input type="submit" value="Créer son compte" @click.prevent="addUser()">
     </form>
   </div>    
 </template>
@@ -48,6 +48,7 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
+       window.alert("Merci d'avoir créé votre compte.");
     }
   }
 }

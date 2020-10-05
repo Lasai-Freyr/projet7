@@ -25,7 +25,7 @@ User.saveUser = ( user, result) => {
 User.findUser = (userAd, result) => {
   console.log("user", userAd);
   sql.query(`SELECT * FROM users WHERE users.address = "${userAd}" ;`, (err, res) => {
-    if (err) {
+    if (err ) {
       console.log('error: ', err );
       result(null, err);
       return;

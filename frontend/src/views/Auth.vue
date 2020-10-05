@@ -1,13 +1,11 @@
 <template>
     <div class="Auth">
-        <div>
-            <button v-on:click="log = false"> Créer un compte</button>
-            <button v-on:click="log = true">Se connecter</button>
-        </div>
-         <div v-show="!log">
+        <div v-show="log">
+             <button v-on:click="log = false">Se connecter à un compte</button>
              <Signup></Signup>
         </div>
-        <div v-show="log">
+        <div v-show="!log">
+            <button v-on:click="log = true"> Créer un compte</button>
              <Login></Login>
         </div>        
     </div>

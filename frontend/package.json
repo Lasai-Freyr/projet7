@@ -2,23 +2,28 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "## Project setup ``` npm install ```",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "sass": "sass --watch ./sass/main.scss:./css/style.css --style compressed"
   },
+  "main": "babel.config.js",
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.5"
+    "vue-router": "^3.4.5",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-vuex": "^4.5.6",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
@@ -44,8 +49,5 @@
     "last 2 versions",
     "not dead"
   ],
-  "description": "## Project setup ``` npm install ```",
-  "main": "babel.config.js",
-  "author": "",
   "license": "ISC"
 }

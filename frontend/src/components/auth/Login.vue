@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="Login">
-    <form id="appForm" class="form_user"  @submit="findUser()">
+    <form id="appForm" class="form_user">
       <div class="form-group">
         <label for="address">Adresse mail : </label>
         <input type="email" class="form-control" id="address" name="address" formControlName="address" v-model="address">
@@ -9,7 +9,7 @@
         <label for="password">Mot de passe : </label>
         <input type="password" id="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Se connecter" @click="findUser()">
+      <input type="submit" value="Se connecter" @click="login()">
     </form>
   </div>    
 </template>
@@ -29,21 +29,16 @@ export default {
     }
   },
   methods: {
-    findUser() {
-      console.log(this.address);
-      console.log("addUser");
-      const body = {"address": this.address, "password": this.password};
-      console.log(body);
-      axios.post(`http://localhost:8080/api/auth/Login`, body, {'Content-Type': 'multipart/form-data' })
-      .then(response => {
-        //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
-        //  console.log(response.data);
-        // JSON responses are automatically parsed.
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-    }
+    login: function () {
+      console.log("login is progress");
+      let address = this.address;
+      let password = this.password;
+      console.log("login is progress 2");
+      this.$store.dispatch('login', { address, password });
+      console.log("router to home");
+      this.$router.go('/posts');
+    },
+    
   }
 }
 </script>

@@ -5,17 +5,32 @@
                 <img src="../assets/images/icon-left-font-monochrome-white2.png" alt="logo groupomania" id="logo">
             </div>            
             <nav>        
-            <router-link :to="{name: 'Home'}">Fil d'actualité</router-link> 
-            <router-link :to="{name: 'Profil'}">Profil</router-link>
-            <router-link :to="{name: 'Signup'}">Créer un compte</router-link>
-            <router-link :to="{name: 'Login'}">Se connecter</router-link>
+            <span v-if="isLoggedIn"> | 
+                <router-link :to="{name: 'Home'}">Fil d'actualité</router-link> 
+                <router-link :to="{name: 'Profil'}">Profil</router-link>
+            <!--<router-link :to="{name: 'Signup'}">Créer un compte</router-link>
+            <router-link :to="{name: 'Login'}">Se connecter</router-link> !-->
+                <a @click="logout">Logout</a>
+            </span>
             </nav>
         </div>
     </header>
 </template>
 
 <script>
-export default {}
+export default {
+    computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+    },
+    methods: {
+      logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/')
+        })
+      }
+    },
+}
 </script>
 
 <style lang="scss">

@@ -8,6 +8,7 @@ import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
 import Posts from '../components/Posts-component.vue'
 import Commentaires from '../components/Commentaires-components.vue'
+import store from '../store.js'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,9 @@ const routes = [
       default: Home,
       newsLine: Home,
       Posts: Posts
+    },
+    meta: {
+      requiresAuth: true
     }
   },
 
@@ -36,6 +40,9 @@ const routes = [
     components: {
       Post: Post,
       commentaires: Commentaires
+    },
+    meta: {
+      requiresAuth: true
     }
   },
 
@@ -61,6 +68,9 @@ const routes = [
     name:'Profil',
     components: {
       Profil: Profil
+    },
+    meta: {
+      requiresAuth: true
     }
   }
 ]
@@ -69,6 +79,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -12,6 +12,7 @@
           <input type="file" accept="image/*" @change="onFileSelected" name="image" id ="image">
           <div id="preview">
             <img v-if="url" :src="url" />
+            <img  src="/images/fractale.jpg" />
           </div>
         </div>
         <p> <input type="submit" value="Poster" @submit="addPost()"> </p>
@@ -72,7 +73,8 @@ export default {
       content: null,
       image: null,
       form: null,
-      SelectedFile: null
+      SelectedFile: null,
+      url: null
     }
   },
   methods: {

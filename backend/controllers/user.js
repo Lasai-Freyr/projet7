@@ -35,9 +35,8 @@ exports.login = (req, res, next) => {
   const userAd = req.body.address;
   console.log("req.body", req.body);
   User.findUser(userAd,(err,data) => {
-    console.log("datation", !data);
-    if (!data) {
-
+    if (err ||data.length == 0) {
+      console.log("adresse fausse");
       return res.status(401).json({ error: 'Utilisateur non trouvé !' });
 
     } else {
