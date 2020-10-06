@@ -9,9 +9,12 @@ exports.createPost = (req, res) => {
     const post = new Post({
       ...postObject })
   } else {
+    //console.log("req.file", req.file);
       const post = new Post({
-      ...postObject,      
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  })
+      ...postObject, 
+        
+      image: `${req.protocol}://${req.get('host')}/images/${req.body.image}`
+    })
 };
   console.log("pinguin 2"); 
   Post.createAPost(postObject,(err) => {

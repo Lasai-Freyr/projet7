@@ -55,11 +55,17 @@ export default {
     li {
       border: solid black 1px;
       width: 100%;
-      margin: 2px;
+      margin: 10px;
+      border-radius: 20px;
+      box-shadow: gray 4px 4px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
   }
   img {
-    width: 100px;
+    width: 400px;
   }
   .user {
     text-align: left;

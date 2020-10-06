@@ -9,13 +9,13 @@
           <input classe="inputText" name="content" id="content" type="content" v-model="content">
         </p>
         <div id="appImg">
-          <input type="file" accept="image/*" @change="onFileSelected" name="image" id ="image">
+          <input class="button-post" type="file" accept="image/*" @change="onFileSelected($event)" name="image" id ="image">
           <div id="preview">
             <img v-if="url" :src="url" />
-            <img  src="/images/fractale.jpg" />
+            <img  src="images/fractale.jpg" />
           </div>
         </div>
-        <p> <input type="submit" value="Poster" @submit="addPost()"> </p>
+        <p> <input class="button-post" type="submit" value="Poster" > </p>
       </form>
     </div>
     <div>
@@ -26,6 +26,7 @@
 
 
 <style>
+
 #preview {
   display: flex;
   justify-content: center;
@@ -34,15 +35,23 @@
 
 #preview img {
   max-width: 100%;
+  width: 200px;
   max-height: 500px;
 }
 
 .news-form {
   border: 1px solid grey;
-  width: 50%;
+  border-radius: 20px;
+  box-shadow: gray 4px 4px;
+  max-width: 800px;
+  padding: 50px;
   display: inline-flex;
   justify-content: center;
   flex-direction: column;
+  font-weight: bold;
+  @media (min-width: 400px) and (max-width: 900px) {
+    width: 90%;
+  }
 }
 
 #title{
@@ -51,8 +60,16 @@
 
 #content {
   margin-top: 10px;
-  width: 400px;
+  width: 90%;
   height: 120px;
+}
+
+.button-post {
+  margin: 10px;
+  border-radius: 12px;
+  background-color: #288dcf;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 </style>
 
@@ -73,28 +90,28 @@ export default {
       content: null,
       image: null,
       form: null,
-      SelectedFile: null,
+      selectedFile: null,
       url: null
     }
   },
   methods: {
     
-    onFileSelected(e) {
-      this.SelectedFile = e.target.files[0];
-      this.url = URL.createObjectURL(file);
+    onFileSelected(event) {
+      this.selectedFile  = event.target.files[0];
+      const file =  event.target.files[0];
+      this.url = URL.createObjectURL(file);  
     },
     addPost() {
         console.log("salamandre");
-        var path = `C:\\fakepath\\${image.value}`;
+        var path = `${image.value}`;
         var filename = path.replace(/^.*\\/, "");
-        console.log(filename);
+        //console.log(filename);
         const form = new FormData();
         form.append("title", title.value);
         form.append("content", content.value);
-        form.append("imageFile", this.SelectedFile);
-        form.append("image", filename);
+        form.append("imageFile", this.selectedFile );
+        form.append("image", filename );
         console.log("axios is posting");
-        console.log(form);
         axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' })
         .then(response => {
           //axios.post(`./frontend/src/assets/images`, this.SelectedFile)

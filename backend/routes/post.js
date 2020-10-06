@@ -10,6 +10,6 @@ router.get('/',  postCtrl.findAllPost);
 router.get('/:id',  postCtrl.findOnePost);
 //router.put('/:id', auth, multer,  postCtrl.modifySauce);  
 router.delete('/:id',  postCtrl.deletePost);
-router.post('/', multer, auth,  postCtrl.createPost);
+router.post('/', multer,  postCtrl.createPost);
 
 module.exports = router;

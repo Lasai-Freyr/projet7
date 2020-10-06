@@ -4,7 +4,7 @@
             <p> {{post.title}} </p>
             <button @click="DeletePost(post.id)">X</button>
             <p> {{ post.content}} </p>
-            <img :src="`./assets/images/${post.image}`" :alt="post.image"> 
+            <img :src="`/images/${post.image}`" :alt="post.image"> 
             <p> posté par {{post.name}} </p>
             <p> posté le {{ post.datePost}} </p>
         </div>

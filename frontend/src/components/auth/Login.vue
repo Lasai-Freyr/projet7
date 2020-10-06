@@ -9,7 +9,7 @@
         <label for="password">Mot de passe : </label>
         <input type="password" id="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Se connecter" @click="login()">
+      <input class="button-signup" type="submit" value="Se connecter" @click="login()">
     </form>
   </div>    
 </template>
@@ -36,7 +36,10 @@ export default {
       console.log("login is progress 2");
       this.$store.dispatch('login', { address, password });
       console.log("router to home");
-      this.$router.go('/posts');
+      const user = this.address;
+      localStorage.setItem('user', user)
+          console.log("user", user)
+      //this.$router.push('/posts');
     },
     
   }

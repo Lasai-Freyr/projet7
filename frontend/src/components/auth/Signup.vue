@@ -13,7 +13,7 @@
         <label for="password">Mot de passe : </label>
         <input type="password" id="password" name="password" v-model="password">
       </div>
-      <input type="submit" value="Créer son compte" @click.prevent="addUser()">
+      <input class="button-signup" type="submit" value="Créer son compte" @click.prevent="addUser()">
     </form>
   </div>    
 </template>
@@ -56,6 +56,7 @@ export default {
 
 <style>
   .form-group {
-    margin: 5px;
+    display: flex;
+   justify-content: space-around;
   }
 </style>

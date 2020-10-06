@@ -75,4 +75,22 @@ exports.login = (req, res, next) => {
 
   });
 }
-    
+
+exports.delteteAccount = (req, res, next) => {
+  const userAd = req.body;
+  console.log("req.params", req);
+  User.findUser(userAd,(err,data) => {
+    const user = data;
+    console.log("user data", data);  
+    const id = user.id; 
+  });
+  User.deleteUser(id,(err) => {
+    //console.log(id);
+    if (err)  {
+      res.status(400).send({message: 'Une erreur s\'est produite en supprimant'});
+    } 
+    else {
+      res.status(200).send({ message: 'utilisateur supprimé supprimé !'});
+    }
+  })
+}

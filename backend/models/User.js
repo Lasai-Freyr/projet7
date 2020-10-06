@@ -35,4 +35,17 @@ User.findUser = (userAd, result) => {
   })
 }
 
+User.deleteUser = (id, result) => {
+  console.log("user", id);
+  sql.query(`DELETE FROM users WHERE users.id = "${id}" ;`, (err, res) => {
+    if (err ) {
+      console.log('error: ', err );
+      result(null, err);
+      return;
+    }
+    console.log("res", res);
+    result(null, res);
+  })
+}
+
   module.exports = User;
