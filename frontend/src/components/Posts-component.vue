@@ -4,7 +4,7 @@
     <li v-for="post of posts" v-bind:key="post.id">
       <router-link :to="{name: 'Post', params:post, id:post.id}">
         <p class="user">{{post.name}} :</p>
-        <p><strong>{{post.title}}</strong></p>
+        <p class="p-title">{{post.title}}</p>
         <p> 
           {{ post.content }}  <br>
           <img :src="`/images/${post.image}`" :alt="post.image"> 
@@ -69,5 +69,13 @@ export default {
   }
   .user {
     text-align: left;
+    max-width: 100px;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+  .p-title {
+    font-weight: bold;
+    font-size: 20px;
   }
 </style>

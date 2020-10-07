@@ -2,9 +2,11 @@
   <div id="appForm" class="home">
     <h1> {{ msg }} </h1>  
     <div>
+      <h2> Quelque chose à partager ?</h2>
       <form class="news-form" @submit="addPost()"> 
+          <h2> Quelque chose à partager ?</h2>
         <p>
-          <label for="name">Quelque chose à dire ? </label> <br>
+          <label for="title">Titre : </label>
           <input name="title" id="title" type="text" v-model="title" height="50px"> <br>
           <input classe="inputText" name="content" id="content" type="content" v-model="content">
         </p>
@@ -12,7 +14,6 @@
           <input class="button-post" type="file" accept="image/*" @change="onFileSelected($event)" name="image" id ="image">
           <div id="preview">
             <img v-if="url" :src="url" />
-            <img  src="images/fractale.jpg" />
           </div>
         </div>
         <p> <input class="button-post" type="submit" value="Poster" > </p>
@@ -43,7 +44,7 @@
   border: 1px solid grey;
   border-radius: 20px;
   box-shadow: gray 4px 4px;
-  max-width: 800px;
+  width: 500px;
   padding: 50px;
   display: inline-flex;
   justify-content: center;

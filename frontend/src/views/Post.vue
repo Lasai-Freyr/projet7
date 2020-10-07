@@ -1,12 +1,16 @@
 <template>
     <div class="Post" id="app">
         <div >
-            <p> {{post.title}} </p>
-            <button @click="DeletePost(post.id)">X</button>
-            <p> {{ post.content}} </p>
-            <img :src="`/images/${post.image}`" :alt="post.image"> 
-            <p> posté par {{post.name}} </p>
-            <p> posté le {{ post.datePost}} </p>
+            <h1> {{post.title}} </h1>
+            <div>
+                <button class="button-red" @click="DeletePost(post.id)" title="supprimer le post">X</button>
+            </div>
+            <div class="post-box">                
+                <p> {{ post.content}} </p>
+                <img :src="`/images/${post.image}`" :alt="post.image"> 
+                <p> posté par {{post.name}} </p>
+                <p> posté le {{ post.datePost}} </p>
+            </div>            
         </div>
        <Commentaires></Commentaires>
     </div>
@@ -48,3 +52,16 @@ import Commentaires from '@/components/Commentaires-components.vue'
     }   
 }
 </script>
+
+<style>
+    .post-box {
+        border: solid black 1px;
+        width: 80%;
+        margin: auto;
+        border-radius: 20px;
+        box-shadow: gray 4px 4px;
+    }
+    .button-red {
+        background-color: #ff0000;
+    }
+</style>

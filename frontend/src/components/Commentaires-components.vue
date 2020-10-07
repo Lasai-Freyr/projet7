@@ -6,7 +6,7 @@
                 <label for="name">Votre commentaire : </label> 
                 <input classe="inputText" name="content" id="content" type="content" v-model="content" height="50px">
                 </p>
-                <p> <input type="submit" value="Poster" @submit="addCom()"> </p>
+                <p> <input class='button' type="submit" value="Commenter" @submit="addCom()"> </p>
             </form>
         </div>
         <div>
@@ -21,16 +21,16 @@
         </div>
 </div>
 </template>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
 import axios from 'axios';
 
 export default {
-    el: "#app",
     name: "commentaires",
     data(){
         return{
-            commentaires: [],
+            commentaires: {},
             content: null,
             form: null
              
@@ -73,5 +73,19 @@ export default {
 </script>
 
 <style>
-
+    .com-form {
+        border: solid black 1px;
+        width: 70%;
+        margin: auto;
+        margin-top: 15px;
+        border-radius: 20px;
+        box-shadow: gray 4px 4px;
+    }
+    .button {
+            margin: 10px;
+            border-radius: 12px;
+            background-color: #288dcf;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+        }
 </style>

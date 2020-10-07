@@ -8,12 +8,18 @@ const Commentaires = function(commentaires) {
   this.dateCommentaire = commentaires.dateCommentaire
 }
 
-Commentaires.findAll = (id,result) => {
+Commentaires.findAll = (id, result) => {
     sql.query(`SELECT commentaires.id, postId, userId, content, dateCommentaire, name FROM commentaires INNER JOIN users on commentaires.userId = users.id WHERE postId = ${id} ORDER BY dateCommentaire DESC`, (err, res) => {
       if (err) {
         console.log('error: ', err );
         result(null, err);
         return;
+      } else {
+        if (!result) {
+        console.log('aucun commentaires');
+        result(null, err);
+        return;
+        }
       }
   
       console.log("commentaires : ", res);

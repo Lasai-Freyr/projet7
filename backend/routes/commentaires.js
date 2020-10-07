@@ -5,10 +5,10 @@ const auth = require('../middleware/auth');
 
 const comCtrl = require('../controllers/commentaires.js');
 
-router.get('/', auth, comCtrl.findAllCommentaires);
+router.get('/', comCtrl.findAllCommentaires);
 //router.get('/:id', comCtrl.findOneCommentaire);
 //router.put('/:id', comCtrl.modifySauce);  
-router.delete('/:id', auth, comCtrl.deleteCommentaire);
-router.post('/', auth, comCtrl.createCommentaire);
+router.delete('/:id',  comCtrl.deleteCommentaire);
+router.post('/', comCtrl.createCommentaire);
 
 module.exports = router;
