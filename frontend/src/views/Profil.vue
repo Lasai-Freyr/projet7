@@ -16,25 +16,31 @@ export default {
   name: "Profil",
   data() {
     return {
-      user: null,
+      user: {},
     }
 
   },
-  
   mounted() {
-  const userAd =  localStorage.getItem('user');
-  const toke =  localStorage.getItem('token');
-  console.log( userAd);
-  console.log( "token", toke);
-  console.log("gogeta");
-  },
+    
+    
+    console.log("gogeta")
+    const jwt = require('jsonwebtoken');
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt.verify(token, 'RANDOM TOKEN_SECRET');
+    const id = decodedToken.userId;
+    console.log(id);
+    axios.get(`http://localhost:8080/api/auth/${id}`)
+    .then(response => {
+        console.log("son goku")
+        console.log(response);
+        //this.user = response.data[0];       
+    })  
+  },  
   methods: {
     DeleteAccount() {
-       const userAd =  localStorage.getItem('user');
-        console.log( userAd);
-      console.log("axios del post");
-      axios.delete(`http://localhost:8080/api/auth/delete`, {body: userAd},{headers:{"Authorization": `Bearer ${this.token}`} })
-      
+      this.$store.dispatch('delete');
+      this.$router.push('/');
+      window.alert("Compte supprimé");
     },    
   }, 
 }

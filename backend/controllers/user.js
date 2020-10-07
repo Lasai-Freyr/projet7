@@ -34,7 +34,7 @@ exports.login = (req, res, next) => {
   const user = req.body;
   const userAd = req.body.address;
   console.log("req.body", req.body);
-  User.findUser(userAd,(err,data) => {
+  User.findAnUser(userAd,(err,data) => {
     if (err ||data.length == 0) {
       console.log("adresse fausse");
       return res.status(401).json({ error: 'Utilisateur non trouvé !' });
@@ -42,7 +42,7 @@ exports.login = (req, res, next) => {
     } else {
 
       console.log("vérif mot de passe");
-      console.log(req.body.password);
+      console.log("data", data);
       console.log(user.password);
       console.log("***********");
       
@@ -56,35 +56,39 @@ exports.login = (req, res, next) => {
             console.log("mdp faux");
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
       }
-      console.log("mdp correct");
+      console.log("mdp correct", userData.id);
       res.status(200).json({
-          userId: user.id,
+          userId: userData.id,
           token: jwt.sign(
-            { userId: user.id},
+            { userId: userData.id},
             'RANDOM TOKEN_SECRET',
             { expiresIn: '24h' }            
             )
           });
       })
       if (err) {
-
         res.status(500).json({ error });   
-
       }
     }
-
   });
 }
 
+exports.findUser = ( req, res, next) => {
+  const id = req.params.id;
+  User.findAnUser((id,err) => {
+    if (err) {
+      res.status(500).send({message: 'Une erreur s\'est produite'});
+    } 
+    else { 
+      res.status(200).send(data)
+    }
+    })
+};
+
 exports.delteteAccount = (req, res, next) => {
-  const userAd = req.body;
-  console.log("req.params", req);
-  User.findUser(userAd,(err,data) => {
-    const user = data;
-    console.log("user data", data);  
-    const id = user.id; 
-  });
-  User.deleteUser(id,(err) => {
+  const userId = req.params.id;
+  console.log("controller userId", userId)
+  User.deleteUser(userId,(err) => {
     //console.log(id);
     if (err)  {
       res.status(400).send({message: 'Une erreur s\'est produite en supprimant'});

@@ -28,7 +28,8 @@ export default {
   },  
   mounted(){    
     console.log("axios is getting");
-    axios.get(`http://localhost:8080/api/posts`)
+    const token = localStorage.getItem('token');
+    axios.get(`http://localhost:8080/api/posts`, {headers: {'authorization': token}})
     .then(response => {
       //  console.log(response.data);
         this.posts = response.data;

@@ -22,22 +22,21 @@ User.saveUser = ( user, result) => {
   });
 }
 
-User.findUser = (userAd, result) => {
-  console.log("user", userAd);
-  sql.query(`SELECT * FROM users WHERE users.address = "${userAd}" ;`, (err, res) => {
+User.findAnUser = (userId, result) => {
+  console.log("user", userId);
+  sql.query(`SELECT * FROM users WHERE users.address = "${userId}" ;`, (err, res) => {
     if (err ) {
       console.log('error: ', err );
       result(null, err);
       return;
     }
-    console.log("res", res);
     result(null, res);
   })
 }
 
-User.deleteUser = (id, result) => {
-  console.log("user", id);
-  sql.query(`DELETE FROM users WHERE users.id = "${id}" ;`, (err, res) => {
+User.deleteUser = (userId, result) => {
+
+  sql.query(`DELETE FROM users WHERE users.id = "${userId}" ;`, (err, res) => {
     if (err ) {
       console.log('error: ', err );
       result(null, err);

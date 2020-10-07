@@ -4,18 +4,21 @@
             <form class="com-form" @submit="addCom()"> 
                 <p>
                 <label for="name">Votre commentaire : </label> 
-                <input classe="inputText" name="content" id="content" type="content" v-model="content" height="50px">
+                <textarea classe="inputText" name="content" id="content" type="content" v-model="content" height="50px"></textarea>
                 </p>
                 <p> <input class='button' type="submit" value="Commenter" @submit="addCom()"> </p>
             </form>
+            <button @click="showComments()" >Voir les commentaires</button>
         </div>
         <div>
             <ul v-if="commentaires && commentaires.length">                
                 <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
-                     <button @click="DeleteCommentaire(commentaire.id)">X</button>
+                    <div class="comment-box">
+                        <!--<button @click="DeleteCommentaire(commentaire.id)">X</button> !-->
                     <p class="user">{{commentaire.name}} :</p>
-                    <p> {{ commentaire.content }}</p>
-                    <p> posté le {{ commentaire.dateCommentaire}}. </p>
+                    <p class="comments"> {{ commentaire.content }}</p>
+                    <p class="comment-date"> posté le {{ commentaire.dateCommentaire}}. </p>
+                    </div>                    
                 </li>
             </ul>
         </div>
@@ -36,15 +39,7 @@ export default {
              
         }
     },
-    beforeMount() {
-     axios.get(`http://localhost:8080/api/commentaires`)
-            .then(response => {
-                console.log("VEGETA")
-               // console.log(response.data);
-                this.commentaires = response.data;
-            // JSON responses are automatically parsed.
-            })    
-    },
+    
     methods: {
         addCom() {
             console.log("carapuce");
@@ -52,7 +47,6 @@ export default {
             console.log(content.value);
             form.append("content", content.value);
             console.log("axios is posting a com");
-            console.log(form);
             axios.post(`http://localhost:8080/api/commentaires`, content, {'Content-Type': 'multipart/form-data' })
             .then(response => {
                 //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
@@ -63,10 +57,20 @@ export default {
                 this.errors.push(e)
             })            
         },
+        showComments() {
+        const token = localStorage.getItem('token');
+        axios.get(`http://localhost:8080/api/commentaires`, {headers: {'authorization': token}})
+            .then(response => {
+                console.log("VEGETA")
+               // console.log(response.data);
+                this.commentaires = response.data;
+            // JSON responses are automatically parsed.
+            })    
+    },
          DeleteCommentaire(commentId) {
              console.log(commentId);
             console.log("axios del com");
-            axios.delete(`http://localhost:8080/api/commentaires/${commentId}`)
+            axios.delete(`http://localhost:8080/api/commentaires/${commentId}`, {headers: {'authorization': token}})
         } 
     }
 }
@@ -88,4 +92,28 @@ export default {
             color: rgb(255, 255, 255);
             font-weight: bold;
         }
+    .comments {
+        background-color: #f0d8d8f1;
+        width: 75%;
+        margin: auto;
+        margin-left: 5px;
+        font-size: 18px;
+    }
+    .comment-box {
+        display: flex;
+        flex-flow: wrap;  
+    }
+    .comment-date {
+        width: 250px;
+        font-size: 14px;
+        text-align: end;
+        margin-right: 15px;
+    }
+    .user {
+        width: 200px;
+        font-size: 16px;
+        text-align: end;
+    }
+
+    
 </style>

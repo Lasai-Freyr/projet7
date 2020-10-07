@@ -49,7 +49,7 @@ Post.findByPk = (id, result) => {
 
 Post.deleteOnePost = (id, result) => {
   console.log(id);
-  sql.query(`DELETE  posts, commentaires FROM posts INNER JOIN commentaires ON posts.id = commentaires.postId WHERE posts.id =${id};`, (err, res) => {
+  sql.query(`DELETE FROM posts WHERE posts.id =${id};`, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);

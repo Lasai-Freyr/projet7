@@ -112,8 +112,8 @@ export default {
         form.append("content", content.value);
         form.append("imageFile", this.selectedFile );
         form.append("image", filename );
-        console.log("axios is posting");
-        axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' })
+         const token = localStorage.getItem('token')
+        axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' }, {headers: {'authorization': token}})
         .then(response => {
           //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
           //  console.log(response.data);

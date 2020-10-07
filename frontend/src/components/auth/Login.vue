@@ -36,9 +36,9 @@ export default {
       console.log("login is progress 2");
       this.$store.dispatch('login', { address, password });
       console.log("router to home");
-      const user = this.address;
-      localStorage.setItem('user', user)
-          console.log("user", user)
+      //const user = this.address;
+      //localStorage.setItem('user', user)
+      //    console.log("user", user)
       //this.$router.push('/posts');
     },
     

@@ -32,8 +32,8 @@ import Commentaires from '@/components/Commentaires-components.vue'
     },
     methods: {
         DeletePost(id) {
-            console.log("axios del post");
-            axios.delete(`http://localhost:8080/api/posts/${id}`)
+             const token = localStorage.getItem('token')
+            axios.delete(`http://localhost:8080/api/posts/${id}`, {headers: {'authorization': token}})
             .then(() => {
                 this.$router.push( {name:"Home"});
             })
@@ -43,7 +43,8 @@ import Commentaires from '@/components/Commentaires-components.vue'
         const id = this.$route.params.id;
         console.log(id);
         console.log("gogeta");
-        axios.get(`http://localhost:8080/api/posts/${id}`)
+        const token = localStorage.getItem('token')
+        axios.get(`http://localhost:8080/api/posts/${id}`, {headers: {'authorization': token}})
         .then(response => {
             console.log("son goku")
             console.log(response.data);
