@@ -49,6 +49,7 @@ export default {
                 console.log("VEGETA")
             // console.log(response.data);
                 this.commentaires = response.data;
+                
             // JSON responses are automatically parsed.
             })
             .catch(e => {
@@ -74,6 +75,12 @@ export default {
              console.log(commentId);
             console.log("axios del com");
             http.delete(`/commentaires/${commentId}`)
+             .then(response => {                
+               this.$router.go();
+            })
+            .catch(e => {
+                this.errors.push(e)
+            })
         } 
     }
 }

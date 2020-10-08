@@ -52,7 +52,10 @@ import Commentaires from '@/components/Commentaires-components.vue'
             console.log(response.data);
             this.post = response.data[0];       
         })
-    }   
+    },
+    beforeMounted() {
+        this.$router.go();
+    }
 }
 </script>
 
