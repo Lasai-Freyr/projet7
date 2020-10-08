@@ -3,8 +3,8 @@
         <div>
             <form class="com-form" @submit="addCom()"> 
                 <p>
-                <label for="name">Votre commentaire : </label> 
-                <textarea classe="inputText" name="content" id="content" type="content" v-model="content" height="50px"></textarea>
+                    <label for="name">Votre commentaire : </label> 
+                    <textarea classe="inputText" name="content" id="content" type="content" v-model="content" height="50px"></textarea>
                 </p>
                 <p> <input class='button' type="submit" value="Commenter" @submit="addCom()"> </p>
             </form>
@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </div>
-</div>
+    </div>
 </template>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
@@ -47,10 +47,7 @@ export default {
         http.get(`/commentaires`)
             .then(response => {
                 console.log("VEGETA")
-            // console.log(response.data);
                 this.commentaires = response.data;
-                
-            // JSON responses are automatically parsed.
             })
             .catch(e => {
                 this.errors.push(e)
@@ -58,22 +55,17 @@ export default {
         },
     methods: {
         addCom() {
-            console.log("carapuce");
             const form = new FormData();
             console.log(content.value);
             form.append("content", content.value);
-            console.log("axios is posting a com");
             http.post(`/commentaires`, content, {'Content-Type': 'multipart/form-data' })
-            .then(response => {                
-                console.log("commentaire posté");
+            .then(response => {
             })
             .catch(e => {
                 this.errors.push(e)
             })
         },        
          DeleteCommentaire(commentId) {
-             console.log(commentId);
-            console.log("axios del com");
             http.delete(`/commentaires/${commentId}`)
              .then(response => {                
                this.$router.go();
@@ -96,11 +88,11 @@ export default {
         box-shadow: gray 4px 4px;
     }
     .button {
-            margin: 10px;
-            border-radius: 12px;
-            background-color: #288dcf;
-            color: rgb(255, 255, 255);
-            font-weight: bold;
+        margin: 10px;
+        border-radius: 12px;
+        background-color: #288dcf;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
         }
     .comments {
         background-color: #f0d8d8f1;

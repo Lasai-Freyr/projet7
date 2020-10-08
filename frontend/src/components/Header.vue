@@ -2,16 +2,16 @@
     <header>
         <div class="header">
             <div class="img">
-                <img src="../assets/images/icon-left-font-monochrome-white2.png" alt="logo groupomania" id="logo">
+                <router-link :to="{name: 'Home'}">
+                    <img src="../assets/images/icon-left-font-monochrome-white2.png" alt="logo groupomania" id="logo">
+                </router-link>
             </div>            
             <nav>        
-            <span v-if="isLoggedIn"> 
-                <router-link :to="{name: 'Home'}">Fil d'actualité</router-link> 
-                <router-link :to="{name: 'Profil'}">Profil</router-link>
-            <!--<router-link :to="{name: 'Signup'}">Créer un compte</router-link>
-            <router-link :to="{name: 'Login'}">Se connecter</router-link> !-->
-                <a @click="logout">Logout</a>
-            </span>
+                <span v-if="isLoggedIn"> 
+                    <router-link :to="{name: 'Home'}">Fil d'actualité</router-link> 
+                    <router-link :to="{name: 'Profil'}">Profil</router-link>
+                    <a @click="logout">Se déconnecter</a>
+                </span>
             </nav>
         </div>
     </header>

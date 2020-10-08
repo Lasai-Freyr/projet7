@@ -8,9 +8,6 @@ const User = function(user)  {
 }
 
 User.saveUser = ( user, result) => {
-  console.log("ajout d'utilisateur");
-  console.log(user.name);
-  console.log(user);
   sql.query( `INSERT INTO users values("${user.name}", "${user.address}", null, "${user.password}");`, (err, res) => {
     if (err) {
       console.log("error", err);
@@ -23,7 +20,6 @@ User.saveUser = ( user, result) => {
 }
 
 User.findAnUser = (userId, result) => {
-  console.log("user", userId);
   sql.query(`SELECT * FROM users WHERE users.id = "${userId}" OR users.address="${userId}" ;`, (err, res) => {
     if (err) {
       console.log('error: ', err );

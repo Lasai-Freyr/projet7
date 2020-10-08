@@ -4,7 +4,7 @@
     <div>
       <h2> Quelque chose à partager ?</h2>
       <form class="news-form" @submit="addPost()"> 
-          <h2> Quelque chose à partager ?</h2>
+        <h2> Quelque chose à partager ?</h2>
         <p>
           <label for="title">Titre : </label>
           <input name="title" id="title" type="text" v-model="title" height="50px"> <br>
@@ -82,8 +82,8 @@ import Posts from '@/components/Posts-component.vue'
 export default {
   name: "Home",
   components: {
-        Posts
-    },
+      Posts
+  },
   data() {
     return {
       msg :"Fil d'actualité ",
@@ -103,25 +103,19 @@ export default {
       this.url = URL.createObjectURL(file);  
     },
     addPost() {
-      
-        console.log("salamandre");
-        var path = `${image.value}`;
-        var filename = path.replace(/^.*\\/, "");
-        //console.log(filename);
-        const form = new FormData();
-        form.append("title", title.value);
-        form.append("content", content.value);
-        form.append("imageFile", this.selectedFile );
-        form.append("image", filename );
-        http.post(`/posts`, form, {'Content-Type': 'multipart/form-data' })
-        .then(response => {
-          //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
-          //  console.log(response.data);
-          // JSON responses are automatically parsed.
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
+      var path = `${image.value}`;
+      var filename = path.replace(/^.*\\/, "");       
+      const form = new FormData();
+      form.append("title", title.value);
+      form.append("content", content.value);
+      form.append("imageFile", this.selectedFile );
+      form.append("image", filename );
+      http.post(`/posts`, form, {'Content-Type': 'multipart/form-data' })
+      .then(response => {
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
     }
   }
 }

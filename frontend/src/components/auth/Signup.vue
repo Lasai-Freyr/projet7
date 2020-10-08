@@ -1,7 +1,7 @@
 <template>
   <div class="Signup">
     <form id="appFormSign" class="form_user" >
-          <div class="form-group">
+      <div class="form-group">
         <label for="name">Nom : </label>
         <input type="text" id="name" v-model="name" name="name" class="form-control">
       </div>
@@ -35,15 +35,9 @@ export default {
   },
   methods: {
     addUser() {
-      console.log(this.name);
-      console.log("addUser");
       const body = {"name": this.name, "address": this.address, "password": this.password};
-      console.log(body);
       axios.post(`http://localhost:8080/api/auth/signup`, body, {'Content-Type': 'multipart/form-data' })
       .then(response => {
-        //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
-        //  console.log(response.data);
-        // JSON responses are automatically parsed.
       })
       .catch(e => {
         this.errors.push(e)

@@ -30,14 +30,10 @@ export default {
   },
   methods: {
     login: function () {
-      console.log("login is progress");
       let address = this.address;
       let password = this.password;
-      console.log("login is progress 2");
       this.$store.dispatch('login', { address, password })
-      .then(resp => { 
-          console.log("router to home");
-          
+      .then(resp => {           
       })
       this.$router.push('Home')
     }        

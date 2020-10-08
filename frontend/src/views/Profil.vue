@@ -21,16 +21,12 @@ export default {
 
   },
   mounted() {
-    console.log("gogeta")
     const jwt = require('jsonwebtoken');
     const token = localStorage.getItem('token');
     const decodedToken = jwt.verify(token, '753215846392576321586015406875');
     const id = decodedToken.userId;
-    console.log(id);
     http.get(`/auth/${id}`)
     .then(response => {
-        console.log("son goku")
-        console.log(response.data);
         this.user = response.data[0];       
     })  
   },  

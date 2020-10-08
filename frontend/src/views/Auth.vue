@@ -1,12 +1,12 @@
 <template>
     <div class="Auth " v-if="!isLoggedIn">
         <div v-show="log" class="signup">
-             <button v-on:click="log = false">Se connecter à un compte</button>
-             <Signup></Signup>
+            <button v-on:click="log = false">Se connecter à un compte</button>
+            <Signup></Signup>
         </div>
         <div v-show="!log" class="login">
             <button v-on:click="log = true"> Créer un compte</button>
-             <Login></Login>
+            <Login></Login>
         </div>        
     </div>
 </template>

@@ -26,15 +26,10 @@ export default {
       errors: []
     } 
   },  
-  mounted(){    
-    console.log("axios is getting");
-   
+  mounted(){   
     http.get(`/posts`)
     .then(response => {
-      //  console.log(response.data);
         this.posts = response.data;
-      // JSON responses are automatically parsed.
-      //this.posts = response.data
     })
     .catch(e => {
       this.errors.push(e)
