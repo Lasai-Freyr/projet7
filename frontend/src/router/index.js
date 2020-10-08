@@ -6,7 +6,7 @@ import Post from '../views/Post.vue'
 import Auth from '../views/Auth.vue'
 import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
-import Posts from '../components/Posts-component.vue'
+import PostsCom from '../components/Posts-component.vue'
 import Commentaires from '../components/Commentaires-components.vue'
 import store from '../store.js'
 
@@ -22,16 +22,13 @@ const routes = [
   },
 
   {
-    path: '/posts',
+    path: '/Home',
     name: 'Home',
     components: {
       default: Home,
       newsLine: Home,
-      Posts: Posts
+      PostsCom: PostsCom
     },
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {

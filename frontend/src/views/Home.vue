@@ -76,7 +76,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
-import axios from 'axios';
+import http from '../http';
 import Posts from '@/components/Posts-component.vue'
 
 export default {
@@ -103,6 +103,7 @@ export default {
       this.url = URL.createObjectURL(file);  
     },
     addPost() {
+      
         console.log("salamandre");
         var path = `${image.value}`;
         var filename = path.replace(/^.*\\/, "");
@@ -112,8 +113,7 @@ export default {
         form.append("content", content.value);
         form.append("imageFile", this.selectedFile );
         form.append("image", filename );
-         const token = localStorage.getItem('token')
-        axios.post(`http://localhost:8080/api/posts`, form, {'Content-Type': 'multipart/form-data' }, {headers: {'authorization': token}})
+        http.post(`/posts`, form, {'Content-Type': 'multipart/form-data' })
         .then(response => {
           //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
           //  console.log(response.data);

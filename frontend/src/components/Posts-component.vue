@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import http from '../http';
 //import VueAxios from 'vue-axios';
 
 export default {
@@ -28,8 +28,8 @@ export default {
   },  
   mounted(){    
     console.log("axios is getting");
-    const token = localStorage.getItem('token');
-    axios.get(`http://localhost:8080/api/posts`, {headers: {'authorization': token}})
+   
+    http.get(`/posts`)
     .then(response => {
       //  console.log(response.data);
         this.posts = response.data;

@@ -8,13 +8,14 @@
                 </p>
                 <p> <input class='button' type="submit" value="Commenter" @submit="addCom()"> </p>
             </form>
-            <button @click="showComments()" >Voir les commentaires</button>
         </div>
         <div>
             <ul v-if="commentaires && commentaires.length">                
                 <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
-                    <div class="comment-box">
-                        <!--<button @click="DeleteCommentaire(commentaire.id)">X</button> !-->
+                    <div class="comment-box"> 
+                    <div class="box-button" v-if="commentaire.userId == userIdCom" >
+                        <button class="button-red" @click="DeleteCommentaire(commentaire.id)" >X</button>
+                    </div>
                     <p class="user">{{commentaire.name}} :</p>
                     <p class="comments"> {{ commentaire.content }}</p>
                     <p class="comment-date"> posté le {{ commentaire.dateCommentaire}}. </p>
@@ -27,19 +28,33 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
-import axios from 'axios';
+import http from '../http';
 
 export default {
     name: "commentaires",
     data(){
         return{
-            commentaires: {},
+            commentaires: null,
+            commentaire: null,
             content: null,
-            form: null
+            form: null,  
+            userIdCom: localStorage.getItem('user')
              
         }
     },
-    
+    mounted() {
+        const userIdCom = localStorage.getItem('user');
+        http.get(`/commentaires`)
+            .then(response => {
+                console.log("VEGETA")
+            // console.log(response.data);
+                this.commentaires = response.data;
+            // JSON responses are automatically parsed.
+            })
+            .catch(e => {
+                this.errors.push(e)
+            })
+        },
     methods: {
         addCom() {
             console.log("carapuce");
@@ -47,30 +62,18 @@ export default {
             console.log(content.value);
             form.append("content", content.value);
             console.log("axios is posting a com");
-            axios.post(`http://localhost:8080/api/commentaires`, content, {'Content-Type': 'multipart/form-data' })
-            .then(response => {
-                //axios.post(`./frontend/src/assets/images`, this.SelectedFile)
-                //  console.log(response.data);
-                // JSON responses are automatically parsed.
+            http.post(`/commentaires`, content, {'Content-Type': 'multipart/form-data' })
+            .then(response => {                
+                console.log("commentaire posté");
             })
             .catch(e => {
                 this.errors.push(e)
-            })            
-        },
-        showComments() {
-        const token = localStorage.getItem('token');
-        axios.get(`http://localhost:8080/api/commentaires`, {headers: {'authorization': token}})
-            .then(response => {
-                console.log("VEGETA")
-               // console.log(response.data);
-                this.commentaires = response.data;
-            // JSON responses are automatically parsed.
-            })    
-    },
+            })
+        },        
          DeleteCommentaire(commentId) {
              console.log(commentId);
             console.log("axios del com");
-            axios.delete(`http://localhost:8080/api/commentaires/${commentId}`, {headers: {'authorization': token}})
+            http.delete(`/commentaires/${commentId}`)
         } 
     }
 }

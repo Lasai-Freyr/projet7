@@ -1,6 +1,11 @@
 const Post = require("../models/Post");
+const jwt = require('jsonwebtoken');
+
 
 exports.createPost = (req, res) => {  
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, '753215846392576321586015406875');
+  const userId = decodedToken.userId;
   console.log("pinguin 1"); 
   console.log(req.body.image);
   const postObject = req.body;
@@ -17,7 +22,7 @@ exports.createPost = (req, res) => {
     })
 };
   console.log("pinguin 2"); 
-  Post.createAPost(postObject,(err) => {
+  Post.createAPost(postObject,userId, (err) => {
     if (err) {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     }

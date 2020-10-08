@@ -1,5 +1,6 @@
 const Commentaires = require("../models/Commentaires");
- 
+const jwt = require('jsonwebtoken');
+
 
 exports.findAllCommentaires = (req, res, next) => { 
   
@@ -16,6 +17,9 @@ exports.findAllCommentaires = (req, res, next) => {
 };
 
 exports.createCommentaire = ( req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, '753215846392576321586015406875');
+  const userId = decodedToken.userId;
   const comObject = req.body;
   console.log("le req body id ");
   console.log(req.body);
@@ -24,7 +28,7 @@ exports.createCommentaire = ( req, res, next) => {
   ...comObject
   });
   console.log("pinguin 2"); 
-  Commentaires.createACom(id, comObject,(err) => {
+  Commentaires.createACom(id,userId, comObject,(err) => {
     if (err) {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     }

@@ -1,7 +1,7 @@
  <template>
   <div class="profil">
     <div>
-      <h1> Bienvenue sur votre profil {{ user}} </h1>
+      <h1> Bienvenue sur votre profil {{ user.name}} </h1>
       <section>
          <input class="button-signup" type="submit" value="Supprimer son compte" @click="DeleteAccount()">
       </section>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import http from '../http';
 
 export default {
   name: "Profil",
@@ -21,19 +21,17 @@ export default {
 
   },
   mounted() {
-    
-    
     console.log("gogeta")
     const jwt = require('jsonwebtoken');
     const token = localStorage.getItem('token');
-    const decodedToken = jwt.verify(token, 'RANDOM TOKEN_SECRET');
+    const decodedToken = jwt.verify(token, '753215846392576321586015406875');
     const id = decodedToken.userId;
     console.log(id);
-    axios.get(`http://localhost:8080/api/auth/${id}`)
+    http.get(`/auth/${id}`)
     .then(response => {
         console.log("son goku")
-        console.log(response);
-        //this.user = response.data[0];       
+        console.log(response.data);
+        this.user = response.data[0];       
     })  
   },  
   methods: {

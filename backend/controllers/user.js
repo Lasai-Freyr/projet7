@@ -61,7 +61,7 @@ exports.login = (req, res, next) => {
           userId: userData.id,
           token: jwt.sign(
             { userId: userData.id},
-            'RANDOM TOKEN_SECRET',
+            '753215846392576321586015406875',
             { expiresIn: '24h' }            
             )
           });
@@ -74,8 +74,9 @@ exports.login = (req, res, next) => {
 }
 
 exports.findUser = ( req, res, next) => {
-  const id = req.params.id;
-  User.findAnUser((id,err) => {
+  const userId = req.params.id;
+  console.log("controler user");
+  User.findAnUser(userId,(err, data) => {
     if (err) {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     } 

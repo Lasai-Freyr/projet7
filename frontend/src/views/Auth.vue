@@ -1,5 +1,5 @@
 <template>
-    <div class="Auth py-1">
+    <div class="Auth " v-if="!isLoggedIn">
         <div v-show="log" class="signup">
              <button v-on:click="log = false">Se connecter à un compte</button>
              <Signup></Signup>
@@ -31,6 +31,9 @@ export default {
         
         } 
     },
+     computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+    }
 }
 </script>
 

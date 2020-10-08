@@ -34,10 +34,11 @@ export default new Vuex.Store({
         .then(resp => {
           console.log("action loggin")
           const token = resp.data.token
-          const user = resp.data.user
+          const user = resp.data.userId
           console.log("resp ", resp.data)
-          localStorage.setItem('token', token)
-          
+          console.log("resp ", user)
+          localStorage.setItem('token', token)          
+          localStorage.setItem('user', user) 
           axios.defaults.headers.common['Authorization'] = token
           commit('auth_success', token, user)
           resolve(resp)          
@@ -53,6 +54,7 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         commit('logout')
         localStorage.removeItem('token')
+        localStorage.removeItem('user')
         delete axios.defaults.headers.common['Authorization']
         resolve()
       })
@@ -62,7 +64,7 @@ export default new Vuex.Store({
         commit('logout')
         const jwt = require('jsonwebtoken');
         const token =  localStorage.getItem('token');
-        const decodedToken = jwt.verify(token, 'RANDOM TOKEN_SECRET');
+        const decodedToken = jwt.verify(token, '753215846392576321586015406875');
         const userId = decodedToken.userId;
         console.log("axios del account");
         axios.delete(`http://localhost:8080/api/auth/${userId}`);

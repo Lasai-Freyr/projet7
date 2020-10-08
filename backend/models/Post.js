@@ -9,10 +9,10 @@ const Post = function(post) {
   this.datePost = post.datePost
 }
 
-Post.createAPost = (postObject,result) => {
+Post.createAPost = (postObject,userId, result) => {
   console.log("ajout de post");
   console.log(postObject);
-  sql.query(`INSERT INTO posts values( NOW(), "${postObject.title}", 1, "${postObject.content}", "${postObject.image}", null)`, (err, res) => {
+  sql.query(`INSERT INTO posts values( NOW(), "${postObject.title}", "${userId}", "${postObject.content}", "${postObject.image}", null)`, (err, res) => {
     if (err) {
       console.log('error: ', err );
         result(null, err);
@@ -37,7 +37,7 @@ Post.findAll = (result) => {
 
 Post.findByPk = (id, result) => {
   console.log(id);
-  sql.query(`SELECT datePost, title, posts.id, userId, content, image, name  FROM posts INNER JOIN users on posts.userId = users.id WHERE posts.id = ${id};`, (err, res) => {
+  sql.query(`SELECT DATE_FORMAT(datePost, ' %e/%c/%Y à %T') AS datePost, title, posts.id, userId, content, image, name, address  FROM posts INNER JOIN users on posts.userId = users.id WHERE posts.id = ${id};`, (err, res) => {
     if (err) {
       console.log('error: ', err );
       result(null, err);

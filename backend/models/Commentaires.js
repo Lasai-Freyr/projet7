@@ -9,7 +9,7 @@ const Commentaires = function(commentaires) {
 }
 
 Commentaires.findAll = (id, result) => {
-    sql.query(`SELECT commentaires.id, postId, userId, content, dateCommentaire, name FROM commentaires INNER JOIN users on commentaires.userId = users.id WHERE postId = ${id} ORDER BY dateCommentaire DESC`, (err, res) => {
+    sql.query(`SELECT commentaires.id, postId, userId, content, DATE_FORMAT(dateCommentaire, ' %e/%c/%Y à %T') AS dateCommentaire, name FROM commentaires INNER JOIN users on commentaires.userId = users.id WHERE postId = ${id} ORDER BY dateCommentaire DESC`, (err, res) => {
       if (err) {
         console.log('error: ', err );
         result(null, err);
@@ -27,10 +27,10 @@ Commentaires.findAll = (id, result) => {
     });
   }
 
-Commentaires.createACom = (id, comObject, result) => {
+Commentaires.createACom = (id, userId, comObject, result) => {
   console.log("ajout de com");
   console.log(comObject);
-  sql.query(`INSERT INTO commentaires values( null, ${id}, "2", "${comObject._value}", NOW());`, (err, res) => {
+  sql.query(`INSERT INTO commentaires values( null, ${id}, "${userId}", "${comObject._value}", NOW());`, (err, res) => {
     if (err) {
       console.log('error: ', err );
         result(null, err);
@@ -42,7 +42,7 @@ Commentaires.createACom = (id, comObject, result) => {
 }
 
 Commentaires.deleteOneCommentaire = (commentId, result) => {
-  sql.query(`DELETE FROM commentaires WHERE id=${commentId}`, (err, res) => {
+  sql.query(`DELETE FROM commentaires WHERE id = "${commentId}"`, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);

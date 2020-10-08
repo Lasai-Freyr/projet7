@@ -24,12 +24,13 @@ User.saveUser = ( user, result) => {
 
 User.findAnUser = (userId, result) => {
   console.log("user", userId);
-  sql.query(`SELECT * FROM users WHERE users.address = "${userId}" ;`, (err, res) => {
-    if (err ) {
+  sql.query(`SELECT * FROM users WHERE users.id = "${userId}" OR users.address="${userId}" ;`, (err, res) => {
+    if (err) {
       console.log('error: ', err );
       result(null, err);
-      return;
+      return
     }
+    console.log("res", res);
     result(null, res);
   })
 }

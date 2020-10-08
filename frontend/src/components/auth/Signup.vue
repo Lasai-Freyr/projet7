@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="Signup">
-    <form id="appForm" class="form_user" >
+  <div class="Signup">
+    <form id="appFormSign" class="form_user" >
           <div class="form-group">
         <label for="name">Nom : </label>
         <input type="text" id="name" v-model="name" name="name" class="form-control">

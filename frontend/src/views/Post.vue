@@ -1,15 +1,14 @@
 <template>
     <div class="Post" id="app">
         <div >
-            <h1> {{post.title}} </h1>
-            <div>
-                <button class="button-red" @click="DeletePost(post.id)" title="supprimer le post">X</button>
-            </div>
-            <div class="post-box">                
+            <h1> {{post.title}} </h1>           
+            <div class="post-box">
+                 <div class="box-button" v-if="post.userId == userId" >
+                    <button  class="button-red" @click="DeletePost(post.id)" title="supprimer le post">X</button>
+                </div>
                 <p> {{ post.content}} </p>
                 <img :src="`/images/${post.image}`" :alt="post.image"> 
-                <p> posté par {{post.name}} </p>
-                <p> posté le {{ post.datePost}} </p>
+                <p> posté par {{post.name}} le {{ post.datePost}}  </p>
             </div>            
         </div>
        <Commentaires></Commentaires>
@@ -17,7 +16,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import http from '../http';
 import Commentaires from '@/components/Commentaires-components.vue'
     export default {
         name:"Post",
@@ -26,25 +25,28 @@ import Commentaires from '@/components/Commentaires-components.vue'
     },
     data() {
         return {           
-            post: {},            
-            error: null        
+            post: {},
+            commentaires: null,
+            commentaire: null,           
+            error: null,
+            userId: localStorage.getItem('user')    
         } 
     },
+    
     methods: {
         DeletePost(id) {
-             const token = localStorage.getItem('token')
-            axios.delete(`http://localhost:8080/api/posts/${id}`, {headers: {'authorization': token}})
+            http.delete(`/posts/${id}`)
             .then(() => {
                 this.$router.push( {name:"Home"});
             })
         },    
     },    
-    mounted() {       
+    beforeCreate() {       
         const id = this.$route.params.id;
         console.log(id);
-        console.log("gogeta");
-        const token = localStorage.getItem('token')
-        axios.get(`http://localhost:8080/api/posts/${id}`, {headers: {'authorization': token}})
+        const userId = localStorage.getItem('user');
+        console.log("gogeta", userId);
+        http.get(`/posts/${id}`)
         .then(response => {
             console.log("son goku")
             console.log(response.data);
@@ -64,5 +66,11 @@ import Commentaires from '@/components/Commentaires-components.vue'
     }
     .button-red {
         background-color: #ff0000;
+        align-self: flex-end;
+    }
+    .box-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
     }
 </style>
