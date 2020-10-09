@@ -4,11 +4,12 @@ const sql = require('./db');
 const User = function(user)  {
   this.name = user.name
   this.address = user.address
-  this.password = user.password  
+  this.password = user.password
+  this.role = user.role  
 }
 
 User.saveUser = ( user, result) => {
-  sql.query( `INSERT INTO users values("${user.name}", "${user.address}", null, "${user.password}");`, (err, res) => {
+  sql.query( `INSERT INTO users values("${user.name}", "${user.address}", null, "${user.password}", "role.User") ;`, (err, res) => {
     if (err) {
       console.log("error", err);
       result(null, err);

@@ -1,7 +1,7 @@
  <template>
   <div class="profil">
     <div>
-      <h1> Bienvenue sur votre profil {{ user.name}} </h1>
+      <h1> Bienvenue sur votre profil <span v-if="user.role == 'role.Admin'"> Administrateur </span> {{ user.name}} </h1>
       <section>
          <input class="button-signup" type="submit" value="Supprimer son compte" @click="DeleteAccount()">
       </section>
@@ -21,10 +21,8 @@ export default {
 
   },
   mounted() {
-    const jwt = require('jsonwebtoken');
-    const token = localStorage.getItem('token');
-    const decodedToken = jwt.verify(token, '753215846392576321586015406875');
-    const id = decodedToken.userId;
+     const userId = localStorage.getItem('user');
+    const id = userId;
     http.get(`/auth/${id}`)
     .then(response => {
         this.user = response.data[0];       

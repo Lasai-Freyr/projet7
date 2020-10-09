@@ -3,7 +3,7 @@
         <div >
             <h1> {{post.title}} </h1>           
             <div class="post-box">
-                 <div class="box-button" v-if="post.userId == userId" >
+                 <div class="box-button" v-if="post.userId == userId || user.role == 'role.Admin'" >
                     <button  class="button-red" @click="DeletePost(post.id)" title="supprimer le post">X</button>
                 </div>
                 <p> {{ post.content}} </p>
@@ -29,7 +29,9 @@ import Commentaires from '@/components/Commentaires-components.vue'
             commentaires: null,
             commentaire: null,           
             error: null,
-            userId: localStorage.getItem('user')    
+            user: null,
+            userId: localStorage.getItem('user') 
+             
         } 
     },
     
@@ -42,19 +44,24 @@ import Commentaires from '@/components/Commentaires-components.vue'
         },    
     },    
     beforeCreate() {       
-        const id = this.$route.params.id;
-        console.log(id);
-        const userId = localStorage.getItem('user');
-        console.log("gogeta", userId);
+        const id = this.$route.params.id;        
         http.get(`/posts/${id}`)
         .then(response => {
-            console.log("son goku")
             console.log(response.data);
             this.post = response.data[0];       
         })
     },
     beforeMounted() {
         this.$router.go();
+    },
+    created() {
+        const userId = localStorage.getItem('user');
+        console.log(userId);
+         http.get(`/auth/${userId}`)
+            .then(response => {
+            this.user = response.data[0];
+            console.log(this.user);
+    })  
     }
 }
 </script>

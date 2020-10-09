@@ -13,7 +13,7 @@
             <ul v-if="commentaires && commentaires.length">                
                 <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
                     <div class="comment-box"> 
-                    <div class="box-button" v-if="commentaire.userId == userIdCom" >
+                    <div class="box-button" v-if="commentaire.userId == userIdCom  || user.role == 'role.Admin'" >
                         <button class="button-red" @click="DeleteCommentaire(commentaire.id)" >X</button>
                     </div>
                     <p class="user">{{commentaire.name}} :</p>
@@ -42,11 +42,19 @@ export default {
              
         }
     },
+    beforeCreate() {
+         const userId = localStorage.getItem('user');
+        console.log(userId);
+         http.get(`/auth/${userId}`)
+            .then(response => {
+            this.user = response.data[0];
+            console.log(this.user);
+        })
+    },
     mounted() {
         const userIdCom = localStorage.getItem('user');
         http.get(`/commentaires`)
             .then(response => {
-                console.log("VEGETA")
                 this.commentaires = response.data;
             })
             .catch(e => {
@@ -56,7 +64,6 @@ export default {
     methods: {
         addCom() {
             const form = new FormData();
-            console.log(content.value);
             form.append("content", content.value);
             http.post(`/commentaires`, content, {'Content-Type': 'multipart/form-data' })
             .then(response => {
