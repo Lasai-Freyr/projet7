@@ -13,10 +13,12 @@
             <ul v-if="commentaires && commentaires.length">                
                 <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
                     <div class="comment-box"> 
-                    <div class="box-button" v-if="commentaire.userId == userIdCom  || user.role == 'role.Admin'" >
-                        <button class="button-red" @click="DeleteCommentaire(commentaire.id)" >X</button>
+                    <div class="firstLine">
+                        <p class="user">{{commentaire.name}} :</p>
+                        <div class="box-button" v-if="commentaire.userId == userIdCom  || user.role == 'role.Admin'" >
+                            <button class="button-red" @click="DeleteCommentaire(commentaire.id)" >X</button>
+                        </div>
                     </div>
-                    <p class="user">{{commentaire.name}} :</p>
                     <p class="comments"> {{ commentaire.content }}</p>
                     <p class="comment-date"> posté le {{ commentaire.dateCommentaire}}. </p>
                     </div>                    
@@ -109,8 +111,10 @@ export default {
         font-size: 18px;
     }
     .comment-box {
-        display: flex;
-        flex-flow: wrap;  
+        display:flex;
+        flex-flow: wrap;
+        flex-direction: column; 
+        align-content: center; 
     }
     .comment-date {
         width: 250px;
@@ -123,6 +127,27 @@ export default {
         font-size: 16px;
         text-align: end;
     }
-
+    ul {
+        margin: auto;
+        width: 70%;
+        padding: 0px;
+    }
+    .button-red {
+        background-color: #ff0000;
+        align-self: flex-end;
+    }
+    .button-red:hover {
+     cursor: pointer;
+    }
+    .box-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .firstLine {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
     
 </style>

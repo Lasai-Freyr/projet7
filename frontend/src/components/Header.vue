@@ -49,13 +49,16 @@ export default {
         margin-right: 10px;
         margin-bottom: 10px;
         a{
-        margin-right: 10px;
+        margin-right: 20px;
         margin-bottom: 5px;
         text-decoration: none;
         font-weight: bold;
         color: white;
         text-shadow: 2px 0 0 rgb(0, 0, 0), 2px 2px 0 rgb(0, 0, 0), 0 2px 0 rgb(0, 0, 0);
-    } 
+        }
+        a:hover{
+            cursor: pointer;
+        }
     }
     
 </style>

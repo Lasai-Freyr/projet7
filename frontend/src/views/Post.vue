@@ -83,4 +83,7 @@ import Commentaires from '@/components/Commentaires-components.vue'
         flex-direction: row;
         justify-content: flex-end;
     }
+    img {
+        max-width: 90%;
+    }
 </style>
