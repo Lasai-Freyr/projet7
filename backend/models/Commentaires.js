@@ -21,8 +21,6 @@ Commentaires.findAll = (id, result) => {
         return;
         }
       }
-  
-      console.log("commentaires : ", res);
       result(null, res);
     });
   }

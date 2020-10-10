@@ -8,8 +8,10 @@
                 </div>
                 <p> {{ post.content}} </p>
                 <img :src="`/images/${post.image}`" :alt="post.image"> 
+                <Likes></Likes>
                 <p> posté par {{post.name}} le {{ post.datePost}}  </p>
-            </div>            
+            </div>
+                       
         </div>
        <Commentaires></Commentaires>
     </div>
@@ -18,10 +20,13 @@
 <script>
 import http from '../http';
 import Commentaires from '@/components/Commentaires-components.vue'
+import Likes from '@/components/Likes-components.vue'
+
     export default {
         name:"Post",
         components: {
-        Commentaires
+        Commentaires,
+        Likes,
     },
     data() {
         return {           
@@ -60,7 +65,6 @@ import Commentaires from '@/components/Commentaires-components.vue'
          http.get(`/auth/${userId}`)
             .then(response => {
             this.user = response.data[0];
-            console.log(this.user);
     })  
     }
 }
@@ -85,5 +89,14 @@ import Commentaires from '@/components/Commentaires-components.vue'
     }
     img {
         max-width: 90%;
+    }
+    .like-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .like, .dislike {
+        width: 20px;
+        margin: 10px;
     }
 </style>

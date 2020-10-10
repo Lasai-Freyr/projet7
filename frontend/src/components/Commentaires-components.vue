@@ -32,6 +32,7 @@
 <script>
 import http from '../http';
 
+
 export default {
     name: "commentaires",
     data(){
@@ -40,17 +41,14 @@ export default {
             commentaire: null,
             content: null,
             form: null,  
-            userIdCom: localStorage.getItem('user')
-             
+            userIdCom: localStorage.getItem('user')             
         }
     },
     beforeCreate() {
          const userId = localStorage.getItem('user');
-        console.log(userId);
          http.get(`/auth/${userId}`)
             .then(response => {
             this.user = response.data[0];
-            console.log(this.user);
         })
     },
     mounted() {
@@ -83,7 +81,7 @@ export default {
                 this.errors.push(e)
             })
         } 
-    }
+    },
 }
 </script>
 
