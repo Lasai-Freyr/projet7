@@ -10,9 +10,8 @@
                 <img :src="`/images/${post.image}`" :alt="post.image"> 
                 <Likes></Likes>
                 <p> posté par {{post.name}} le {{ post.datePost}}  </p>
-            </div>
-                       
-        </div>
+            </div>                       
+        </div >
        <Commentaires></Commentaires>
     </div>
 </template>
@@ -35,8 +34,7 @@ import Likes from '@/components/Likes-components.vue'
             commentaire: null,           
             error: null,
             user: null,
-            userId: localStorage.getItem('user') 
-             
+            userId: localStorage.getItem('user'),
         } 
     },
     
@@ -46,7 +44,7 @@ import Likes from '@/components/Likes-components.vue'
             .then(() => {
                 this.$router.push( {name:"Home"});
             })
-        },    
+        } 
     },    
     beforeCreate() {       
         const id = this.$route.params.id;        
@@ -65,8 +63,8 @@ import Likes from '@/components/Likes-components.vue'
          http.get(`/auth/${userId}`)
             .then(response => {
             this.user = response.data[0];
-    })  
-    }
+        });
+    },
 }
 </script>
 

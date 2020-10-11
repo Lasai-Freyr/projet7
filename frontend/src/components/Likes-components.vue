@@ -1,14 +1,14 @@
 <template>
-    <div class="like-buttons" :key="SuperKey">
-        <div class="likes">
-            <button id="button-like" v-bind:class="activeLike ? 'activeLike' :'notActive'" >
-                <i class="like fas fa-thumbs-up" @click="onLike()"></i>
+    <div class="like-buttons" id="likes" >
+        <div class="likes" >
+            <button id="button-like" v-bind:class="activeLike ? 'activeLike' :'notActive'"  @click="onLike()" >
+                <i class="like fas fa-thumbs-up"></i>
             </button >
-            <span>{{ post.likes }}</span>
+            <span >{{ post.likes }}</span>
         </div>
         <div class="dislikes" >
-            <button v-bind:class="activeDislike ? 'activeDislike' :'notActive'">
-                <i class="dislike fas fa-thumbs-down" @click="onDislike()" ></i>
+            <button v-bind:class="activeDislike ? 'activeDislike' :'notActive'" @click="onDislike()">
+                <i class="dislike fas fa-thumbs-down"  ></i>
             </button>
             <span>{{ post.dislikes }}</span>
         </div>
@@ -17,15 +17,14 @@
 
 <script>
 import http from '../http';
-
 export default {
     name:"Likes",
     data() {
         return {
             post: {},
-            isActive: true,
-            isNotActive: false
-            
+            activeLike: null,
+            activeDislike: null,
+            componentKey: 0,
         }
        
     },    
@@ -39,13 +38,11 @@ export default {
             this.post = response.data[0];
             console.log("usersliked", this.post.usersLiked);
             if ( this.post.usersLiked.includes(userId)) {
-                console.log("blabla");
                  this.activeLike = true
                  this.activeDislike = false   
                 return 
             } else {  
                 if ( this.post.usersDisliked.includes(userId)) {
-                    console.log("blabla2");
                    this.activeLike = false
                     this.activeDislike = true
                 } else {
@@ -58,10 +55,6 @@ export default {
             }
         })
     },
-    created() {
-        //userId = localStorage.getItem("user");
-
-    },
     methods: {
         onLike() {
             console.log("liking");
@@ -71,13 +64,10 @@ export default {
             const data = { "userId": userId,"like": like};
             http.post(`/posts/${id}/like`,{data} )
             .then(() => {
-                 console.log("liked");
-                 if ( !this.activeLike) {
-                     return { activeLike: this.isActive}
-                 } else {
-                     return { activeLike: false}
-                 }
+                console.log("liked");
+                //this.$router.go()
             });
+            //this.$router.$forceUpdate()
         },
         onDislike() {
             console.log("disliking");
@@ -88,10 +78,12 @@ export default {
             http.post(`/posts/${id}/like`,{data} )
             .then(() => {
                  console.log("disliked");
-                  this.$forceUpdate()
+                  this.componentKey += 1;
+                 // this.$router.go()
             });
+            //this.$forceUpdate()
         }
-    }    
+    }
 }
 </script>
 

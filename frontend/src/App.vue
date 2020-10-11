@@ -14,7 +14,7 @@
 
 </template>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
   import Header from '@/components/Header'
 

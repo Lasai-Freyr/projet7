@@ -10,7 +10,7 @@
             </form>
         </div>
         <div>
-            <ul v-if="commentaires && commentaires.length">                
+            <ul v-if="commentaires && commentaires.length">
                 <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
                     <div class="comment-box"> 
                     <div class="firstLine">
