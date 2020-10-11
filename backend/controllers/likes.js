@@ -24,12 +24,10 @@ exports.Likes = ( req, res, next) =>  {
             const userWantsToDislike = (like == -1);
             const userWantsToCancelLike = ( usersLiked.includes(userId) &&  (like == 1));
             const userWantsToCancelDislike = (usersDisliked.includes(userId) && (like == -1) );
-            const userCanLike = (!usersLiked.includes(userId));
-            const userCanDislike = (!usersDisliked.includes(userId));
             const notTheFirstVote = (usersLiked.includes(userId) || usersDisliked.includes(userId));
 
-            if (userWantsToLike && userCanLike)  {usersLiked.push(`${userId}`)};
-            if (userWantsToDislike && userCanDislike) {usersDisliked.push(`${userId}`)};
+            if (userWantsToLike && !notTheFirstVote)  {usersLiked.push(`${userId}`)};
+            if (userWantsToDislike && !notTheFirstVote) {usersDisliked.push(`${userId}`)};
 
             if (userWantsToCancelLike && notTheFirstVote)  {
                 let index = usersLiked.indexOf(userId);
