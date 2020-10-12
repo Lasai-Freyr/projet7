@@ -44,7 +44,7 @@
   border: 1px solid grey;
   border-radius: 20px;
   box-shadow: gray 4px 4px;
-  width: 500px;
+  max-width: 500px;
   padding: 50px;
   display: inline-flex;
   justify-content: center;

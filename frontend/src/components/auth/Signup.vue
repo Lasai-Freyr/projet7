@@ -42,7 +42,8 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
-       window.alert("Merci d'avoir créé votre compte.");
+      window.alert("Merci d'avoir créé votre compte.");
+      this.$router.go();
     }
   }
 }
