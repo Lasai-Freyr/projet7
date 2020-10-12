@@ -26,7 +26,8 @@ Post.createAPost = (postObject,userId, result) => {
 }
 
 Post.findAll = (result) => {
-  sql.query('SELECT datePost, title, posts.id, userId, content, image, name  FROM posts INNER JOIN users on posts.userId = users.id ORDER BY datePost DESC', (err, res) => {
+  sql.query(`SELECT  DATE_FORMAT(datePost, ' %e/%c/%Y à %T') AS datePost,likes, dislikes, title, posts.id, userId, content, image, name 
+  FROM posts INNER JOIN users on posts.userId = users.id ORDER BY datePost DESC`, (err, res) => {
     if (err) {
       console.log('error: ', err );
       result(null, err);
@@ -38,8 +39,10 @@ Post.findAll = (result) => {
 }
 
 Post.findByPk = (id, result) => {
-  sql.query(`SELECT DATE_FORMAT(datePost, ' %e/%c/%Y à %T') AS datePost, title, likes, dislikes, usersLiked, usersDisliked,
-   posts.id, userId, content, image, name, address  FROM posts INNER JOIN users on posts.userId = users.id WHERE posts.id = "${id}";`, (err, res) => {
+  sql.execute(`SELECT DATE_FORMAT(datePost, ' %e/%c/%Y à %T') AS datePost, title, likes, dislikes, usersLiked, usersDisliked,
+   posts.id, userId, content, image, name, address  FROM posts INNER JOIN users on posts.userId = users.id WHERE posts.id = ? ;`,
+   [`${id}`],
+    (err, res) => {
     if (err) {
       console.log('error: ', err );
       result(null, err);
@@ -50,7 +53,9 @@ Post.findByPk = (id, result) => {
 }
 
 Post.deleteOnePost = (id, result) => {
-  sql.query(`DELETE FROM posts WHERE posts.id =${id};`, (err, res) => {
+  sql.execute(`DELETE FROM posts WHERE posts.id =? ;`,
+  [`${id}`],
+   (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);
@@ -63,7 +68,8 @@ Post.deleteOnePost = (id, result) => {
 
 Post.modifLike = (id, updateLike) => {
   sql.query(`UPDATE posts set likes = ${updateLike.likes}, dislikes = ${updateLike.dislikes},
-   usersLiked = "${updateLike.usersLiked}", usersDisliked = "${updateLike.usersDisliked}" WHERE id = "${id}";`)
+   usersLiked = "${updateLike.usersLiked}", usersDisliked = "${updateLike.usersDisliked}" WHERE id =? ;`,
+   [`${id}`])
 }
 
 module.exports = Post;

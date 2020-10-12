@@ -9,7 +9,9 @@ const Commentaires = function(commentaires) {
 }
 
 Commentaires.findAll = (id, result) => {
-    sql.query(`SELECT commentaires.id, postId, userId, content, DATE_FORMAT(dateCommentaire, ' %e/%c/%Y à %T') AS dateCommentaire, name FROM commentaires INNER JOIN users on commentaires.userId = users.id WHERE postId = ${id} ORDER BY dateCommentaire DESC`, (err, res) => {
+    sql.execute(`SELECT commentaires.id, postId, userId, content, DATE_FORMAT(dateCommentaire, ' %e/%c/%Y à %T') AS dateCommentaire, name
+     FROM commentaires INNER JOIN users on commentaires.userId = users.id WHERE postId = ? ORDER BY dateCommentaire DESC`,
+     [`${id}`], (err, res) => {
       if (err) {
         console.log('error: ', err );
         result(null, err);
@@ -38,7 +40,8 @@ Commentaires.createACom = (id, userId, comObject, result) => {
 }
 
 Commentaires.deleteOneCommentaire = (commentId, result) => {
-  sql.query(`DELETE FROM commentaires WHERE id = "${commentId}"`, (err, res) => {
+  sql.execute(`DELETE FROM commentaires WHERE id = ? `,
+  [`${commentId}`], (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);

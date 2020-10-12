@@ -21,7 +21,8 @@ User.saveUser = ( user, result) => {
 }
 
 User.findAnUser = (userId, result) => {
-  sql.query(`SELECT * FROM users WHERE users.id = "${userId}" OR users.address="${userId}" ;`, (err, res) => {
+  sql.execute(`SELECT * FROM users WHERE users.id = ? OR users.address= ? ;`,
+  [`${userId}`,`${userId}`], (err, res) => {
     if (err) {
       console.log('error: ', err );
       result(null, err);
@@ -34,7 +35,8 @@ User.findAnUser = (userId, result) => {
 
 User.deleteUser = (userId, result) => {
 
-  sql.query(`DELETE FROM users WHERE users.id = "${userId}" ;`, (err, res) => {
+  sql.execute(`DELETE FROM users WHERE users.id =  ? ;`,
+  [`${userId}`], (err, res) => {
     if (err ) {
       console.log('error: ', err );
       result(null, err);

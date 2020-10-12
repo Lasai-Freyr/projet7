@@ -65,8 +65,18 @@ export default {
             http.post(`/posts/${id}/like`,{data} )
             .then(() => {
                 console.log("liked");
+                 
                 //this.$router.go()
             });
+            if ( this.post.usersLiked.includes(userId)) {
+                      this.activeLike = false
+                    this.post.likes--; 
+                } else {
+                    if ( !this.post.usersLiked.includes(userId)) {
+                        this.activeLike = true
+                        this.post.likes++;
+                    }
+                }
             //this.$router.$forceUpdate()
         },
         onDislike() {
@@ -78,8 +88,8 @@ export default {
             http.post(`/posts/${id}/like`,{data} )
             .then(() => {
                  console.log("disliked");
-                  this.componentKey += 1;
-                 // this.$router.go()
+                  this.post.dislikes++;
+                 this.$router.go()
             });
             //this.$forceUpdate()
         }

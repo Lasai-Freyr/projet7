@@ -3,12 +3,19 @@
   <ul v-if="posts && posts.length">
     <li v-for="post of posts" v-bind:key="post.id">
       <router-link :to="{name: 'Post', params:post, id:post.id}">
-        <p class="user">{{post.name}} :</p>
         <p class="p-title">{{post.title}}</p>
         <p> 
-          {{ post.content }}  <br>
-          <img :src="`/images/${post.image}`" :alt="post.image"> 
-        </p>
+          {{ post.content }} </p>
+          <div v-if="post.image">
+            <img :src="`/images/${post.image}`" :alt="post.image">
+          </div>
+          <div>
+             <i class="like fas fa-thumbs-up"></i>
+            <span >{{ post.likes }}</span>
+            <i class="dislike fas fa-thumbs-down"  ></i>
+            <span>{{ post.dislikes }}</span>
+          </div>
+         <p> posté par <strong> {{post.name}} </strong> le {{ post.datePost}}  </p>
       </router-link>
     </li>
   </ul>
@@ -40,6 +47,12 @@ export default {
 </script>
 
 <style lang="scss">
+  .like {
+    color: green;
+   }
+   .dislike {
+     color:  #ce0000;
+   }
   ul {
     width: 60%;
     display: flex;

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import http from './http';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -30,14 +32,14 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        axios({url: 'http://localhost:8080/api/auth/Login', data: user, method: 'POST' })
+        http({url: 'http://localhost:8080/api/auth/Login', data: user, method: 'POST' })
         .then(resp => {
-          const token = resp.data.token
-          const user = resp.data.userId
-          localStorage.setItem('token', token)          
-          localStorage.setItem('user', user) 
-          axios.defaults.headers.common['Authorization'] = token
-          commit('auth_success', token, user)
+          const token = resp.data.token;
+          const user = resp.data.userId;
+          localStorage.setItem('token', token) ;         
+          localStorage.setItem('user', user) ;
+          axios.defaults.headers.common['Authorization'] = token;
+          commit('auth_success', token, user);
           resolve(resp)          
         })
         .catch(err => {

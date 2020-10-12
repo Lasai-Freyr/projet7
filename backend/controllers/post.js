@@ -7,6 +7,7 @@ exports.createPost = (req, res) => {
   const decodedToken = jwt.verify(token, '753215846392576321586015406875');
   const userId = decodedToken.userId;
   const postObject = req.body;
+  console.log("user***********", userId);
   delete postObject.id;
   if (!req.body.image) {
     const post = new Post({
