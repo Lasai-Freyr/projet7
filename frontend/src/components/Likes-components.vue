@@ -24,7 +24,7 @@ export default {
             post: {},
             activeLike: null,
             activeDislike: null,
-            componentKey: 0,
+            liked: null
         }
        
     },    
@@ -65,19 +65,23 @@ export default {
             http.post(`/posts/${id}/like`,{data} )
             .then(() => {
                 console.log("liked");
-                 
-                //this.$router.go()
-            });
-            if ( this.post.usersLiked.includes(userId)) {
-                      this.activeLike = false
-                    this.post.likes--; 
+                if ( this.activeDislike == true) {
+                   return 
                 } else {
-                    if ( !this.post.usersLiked.includes(userId)) {
-                        this.activeLike = true
+                    if ( this.activeLike == false) {
+                        this.activeLike = true;
                         this.post.likes++;
-                    }
+                    
+                    } else {
+                        if (  this.activeLike == true) {
+                        this.activeLike = false
+                        this.post.likes--;
+                        } else { return}
+                    } 
                 }
-            //this.$router.$forceUpdate()
+                 
+            });
+            
         },
         onDislike() {
             console.log("disliking");
@@ -88,10 +92,22 @@ export default {
             http.post(`/posts/${id}/like`,{data} )
             .then(() => {
                  console.log("disliked");
-                  this.post.dislikes++;
-                 this.$router.go()
+                if (this.activeLike == true) {
+                    return
+                }   
+                else {
+                    if ( this.activeDislike == false) {
+                        this.activeDislike = true;
+                        this.post.dislikes++;
+                    
+                    } else {
+                        if (  this.activeDislike == true) {
+                        this.activeDislike = false
+                        this.post.dislikes--;
+                        } else { return}
+                    }
+                }               
             });
-            //this.$forceUpdate()
         }
     }
 }

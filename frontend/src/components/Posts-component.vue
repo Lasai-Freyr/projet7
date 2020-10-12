@@ -10,9 +10,9 @@
             <img :src="`/images/${post.image}`" :alt="post.image">
           </div>
           <div>
-             <i class="like fas fa-thumbs-up"></i>
+             <i class="likes fas fa-thumbs-up"></i>
             <span >{{ post.likes }}</span>
-            <i class="dislike fas fa-thumbs-down"  ></i>
+            <i class="dislikes fas fa-thumbs-down"  ></i>
             <span>{{ post.dislikes }}</span>
           </div>
          <p> posté par <strong> {{post.name}} </strong> le {{ post.datePost}}  </p>
@@ -47,11 +47,14 @@ export default {
 </script>
 
 <style lang="scss">
-  .like {
+  .likes {
     color: green;
+    margin-right: 5px;
    }
-   .dislike {
+   .dislikes {
      color:  #ce0000;
+     margin-left: 15px;
+     margin-right: 5px;
    }
   ul {
     width: 60%;
