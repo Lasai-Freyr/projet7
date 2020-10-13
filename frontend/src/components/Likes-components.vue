@@ -30,7 +30,7 @@ export default {
     },    
     beforeCreate() {       
         const id = this.$route.params.id;
-        const userId = localStorage.getItem("user");
+        const userId = sessionStorage.getItem("user");
         console.log("id", id);      
         http.get(`/posts/${id}`)
         .then(response => {
@@ -59,7 +59,7 @@ export default {
         onLike() {
             console.log("liking");
             const id = this.$route.params.id;
-            const userId = localStorage.getItem("user");
+            const userId = sessionStorage.getItem("user");
             const like =  1;
             const data = { "userId": userId,"like": like};
             http.post(`/posts/${id}/like`,{data} )
@@ -86,7 +86,7 @@ export default {
         onDislike() {
             console.log("disliking");
             const id = this.$route.params.id;
-            const userId = localStorage.getItem("user");
+            const userId = sessionStorage.getItem("user");
             const like =  -1;
             const data = { "userId": userId,"like": like};
             http.post(`/posts/${id}/like`,{data} )

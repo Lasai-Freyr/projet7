@@ -33,9 +33,13 @@ export default {
       let address = this.address;
       let password = this.password;
       this.$store.dispatch('login', { address, password })
-      .then(resp => {           
+      .then(resp => {   
+        console.log("response", resp);
+        const user = resp.data.userId;
+        sessionStorage.setItem('user', user) ;
+        console.log("response", user);
       })
-      this.$router.push('Home')
+      this.$router.push("Home"); 
     }        
   }
 }

@@ -117,10 +117,10 @@ export default {
         this.errors.push(e)
       })
     }
-  }, Beforecreate() {
-    const userId = localStorage.getItem("user");
-    this.$router.go();
-    console.log(userId);
+  }, created() {
+    const userId = sessionStorage.getItem("user");
+    //this.$router.go();
+    console.log("**********",userId);
   }
 }
 </script>

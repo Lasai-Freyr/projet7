@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     status: '',
-    token: localStorage.getItem('token') || '',
+    token: sessionStorage.getItem('token') || '',
     user : {}
   },
   mutations: {
@@ -36,25 +36,25 @@ export default new Vuex.Store({
         .then(resp => {
           const token = resp.data.token;
           const user = resp.data.userId;
-          localStorage.setItem('token', token) ;         
-          localStorage.setItem('user', user) ;
+          sessionStorage.setItem('token', token) ;         
+         
           axios.defaults.headers.common['Authorization'] = token;
           commit('auth_success', token, user);
           resolve(resp)          
         })
         .catch(err => {
           commit('auth_error')
-          localStorage.removeItem('token')
+          sessionStorage.removeItem('token')
           reject(err)
         })
       })
     },
     logout({commit}){
       return new Promise((resolve) => {
-        commit('logout')
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        delete axios.defaults.headers.common['Authorization']
+        commit('logout');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
+        delete axios.defaults.headers.common['Authorization'];
         resolve()
       })
     },
@@ -62,12 +62,13 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         commit('logout')
         const jwt = require('jsonwebtoken');
-        const token =  localStorage.getItem('token');
+        const token =  sessionStorage.getItem('token');
         const decodedToken = jwt.verify(token, '753215846392576321586015406875');
         const userId = decodedToken.userId;
         console.log("axios del account");
-        axios.delete(`http://localhost:8080/api/auth/${userId}`);
-        localStorage.removeItem('token');
+        http.delete(`http://localhost:8080/api/auth/${userId}`);
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
         delete axios.defaults.headers.common['Authorization']
         
         resolve()

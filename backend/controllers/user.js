@@ -26,8 +26,8 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   const user = req.body;
-  const userAd = req.body.address;
-  User.findAnUser(userAd,(err,data) => {
+  const userId = req.body.address;
+  User.findAnUser(userId,(err,data) => {
     if (err ||data.length == 0) {
       return res.status(401).json({ error: 'Utilisateur non trouvé !' });
 

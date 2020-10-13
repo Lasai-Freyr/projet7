@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Profil from '../views/Profil.vue'
 import Post from '../views/Post.vue'
-import AdminPage from '../views/AdminPage.vue'
 import Auth from '../views/Auth.vue'
 import Login from '../components/auth/Login.vue'
 import Signup from '../components/auth/Signup.vue'
@@ -31,13 +30,7 @@ const routes = [
       PostsCom: PostsCom
     },
   },
-  { 
-    path: '/admin', 
-    component: AdminPage, 
-    meta: {
-      requiresAuth: true
-    }
-  },
+
   {
     path: `/posts/:id`,
     name: 'Post',

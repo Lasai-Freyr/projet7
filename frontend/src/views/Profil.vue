@@ -21,12 +21,12 @@ export default {
 
   },
   mounted() {
-     const userId = localStorage.getItem('user');
+     const userId = sessionStorage.getItem('user');
     const id = userId;
     http.get(`/auth/${id}`)
     .then(response => {
-        this.user = response.data[0];       
-    })  
+        this.user = response.data[0];
+    })
   },  
   methods: {
     DeleteAccount() {
