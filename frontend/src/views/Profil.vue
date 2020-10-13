@@ -21,7 +21,7 @@ export default {
 
   },
   mounted() {
-     const userId = sessionStorage.getItem('user');
+     const userId = localStorage.getItem('user');
     const id = userId;
     http.get(`/auth/${id}`)
     .then(response => {

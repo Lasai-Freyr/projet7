@@ -41,18 +41,18 @@ export default {
             commentaire: null,
             content: null,
             form: null,  
-            userIdCom: sessionStorage.getItem('user')             
+            userIdCom: localStorage.getItem('user')             
         }
     },
     beforeCreate() {
-         const userId = sessionStorage.getItem('user');
+         const userId = localStorage.getItem('user');
          http.get(`/auth/${userId}`)
             .then(response => {
             this.user = response.data[0];
         })
     },
     mounted() {
-        const userIdCom = sessionStorage.getItem('user');
+        const userIdCom = localStorage.getItem('user');
         http.get(`/commentaires`)
             .then(response => {
                 this.commentaires = response.data;

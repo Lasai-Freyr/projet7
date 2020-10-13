@@ -21,6 +21,7 @@ User.saveUser = ( user, result) => {
 }
 
 User.findAnUser = (userId, result) => {
+  console.log("truc 1");
   sql.execute(`SELECT * FROM users WHERE users.id = ? OR users.address= ? ;`,
   [`${userId}`,`${userId}`], (err, res) => {
     if (err) {
@@ -28,7 +29,7 @@ User.findAnUser = (userId, result) => {
       result(null, err);
       return
     }
-    console.log("res", res);
+    console.log("truc 2");
     result(null, res);
   })
 }

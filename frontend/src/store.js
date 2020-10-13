@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     status: '',
-    token: sessionStorage.getItem('token') || '',
+    token: localStorage.getItem('token') || '',
     user : {}
   },
   mutations: {
@@ -29,22 +29,24 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({commit}, user){
+    login({commit}, form){
       return new Promise((resolve, reject) => {
-        commit('auth_request')
-        http({url: 'http://localhost:8080/api/auth/Login', data: user, method: 'POST' })
-        .then(resp => {
-          const token = resp.data.token;
-          const user = resp.data.userId;
-          sessionStorage.setItem('token', token) ;         
-         
+        console.log("Compte 1");
+        http.post('/auth/Login', form)
+        .then(res => {
+          console.log("Compte 1.2",res.data);
+          const token = res.data.token;
+          const user = res.data.userId;
+          localStorage.setItem('token', token);         
+          localStorage.setItem('user', user);         
           axios.defaults.headers.common['Authorization'] = token;
           commit('auth_success', token, user);
-          resolve(resp)          
+          console.log("Compte 2");
+          resolve(res)    
         })
         .catch(err => {
           commit('auth_error')
-          sessionStorage.removeItem('token')
+          localStorage.removeItem('token')
           reject(err)
         })
       })
@@ -52,8 +54,8 @@ export default new Vuex.Store({
     logout({commit}){
       return new Promise((resolve) => {
         commit('logout');
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('user');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         delete axios.defaults.headers.common['Authorization'];
         resolve()
       })
@@ -62,13 +64,13 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         commit('logout')
         const jwt = require('jsonwebtoken');
-        const token =  sessionStorage.getItem('token');
+        const token =  localStorage.getItem('token');
         const decodedToken = jwt.verify(token, '753215846392576321586015406875');
         const userId = decodedToken.userId;
         console.log("axios del account");
-        http.delete(`http://localhost:8080/api/auth/${userId}`);
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('user');
+        http.delete(`/auth/${userId}`);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         delete axios.defaults.headers.common['Authorization']
         
         resolve()

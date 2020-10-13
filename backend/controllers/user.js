@@ -25,21 +25,24 @@ exports.signup = (req, res, next) => {
   
 
 exports.login = (req, res, next) => {
+  console.log("bidule", req.body);
   const user = req.body;
   const userId = req.body.address;
   User.findAnUser(userId,(err,data) => {
+    console.log("bidule2");
     if (err ||data.length == 0) {
+      console.log("bidule3");
       return res.status(401).json({ error: 'Utilisateur non trouvé !' });
 
     } else {
-
+      console.log("bidule4");
       const userData = data[0];
       bcrypt.compare( user.password, userData.password)
       .then(valid => {
-          if (!valid) {
+          if (!valid) { console.log("bidule5");
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
-      }
-      res.status(200).json({
+      }console.log("bidule6");
+      res.status(200).json({ 
           userId: userData.id,
           token: jwt.sign(
             { userId: userData.id},

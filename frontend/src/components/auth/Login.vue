@@ -3,11 +3,11 @@
     <form id="appFormLog" class="form_user">
       <div class="form-group">
         <label for="address">Adresse mail : </label>
-        <input type="email" class="form-control"  name="address" formControlName="address" v-model="address">
+        <input type="email" id="address" class="form-control"  name="address" formControlName="address" v-model="address">
       </div>
       <div class="form-group">
         <label for="password">Mot de passe : </label>
-        <input type="password" name="password" v-model="password">
+        <input type="password" id="password" name="password" v-model="password">
       </div>
       <input class="button-signup" type="submit" value="Se connecter" @click="login()">
     </form>
@@ -23,24 +23,23 @@ export default {
   name: "Login",
   data() {
     return {
-      address: null,
-      password: null,
+      address: '',
+      password: '',
       form: null
     }
   },
   methods: {
     login: function () {
+     console.log("Compte 3");
+      const form = {"address": this.address, "password": this.password };
       let address = this.address;
       let password = this.password;
-      this.$store.dispatch('login', { address, password })
-      .then(resp => {   
-        console.log("response", resp);
-        const user = resp.data.userId;
-        sessionStorage.setItem('user', user) ;
-        console.log("response", user);
+      console.log( form);
+      console.log( this.address);
+      this.$store.dispatch('login', form)
+      .then(resp => {
       })
-      this.$router.push("Home"); 
-    }        
+    }
   }
 }
 </script>

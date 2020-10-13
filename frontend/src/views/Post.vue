@@ -34,7 +34,7 @@ import Likes from '@/components/Likes-components.vue'
             commentaire: null,           
             error: null,
             user: null,
-            userId: sessionStorage.getItem('user'),
+            userId: localStorage.getItem('user'),
         } 
     },
     
@@ -58,7 +58,7 @@ import Likes from '@/components/Likes-components.vue'
         this.$router.go();
     },
     created() {
-        const userId = sessionStorage.getItem('user');
+        const userId = localStorage.getItem('user');
         console.log(userId);
          http.get(`/auth/${userId}`)
             .then(response => {

@@ -118,7 +118,7 @@ export default {
       })
     }
   }, created() {
-    const userId = sessionStorage.getItem("user");
+    const userId = localStorage.getItem("user");
     //this.$router.go();
     console.log("**********",userId);
   }

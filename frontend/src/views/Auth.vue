@@ -1,13 +1,18 @@
 <template>
-    <div class="Auth " v-if="!isLoggedIn">
-        <div v-show="log" class="signup">
-            <button v-on:click="log = false">Se connecter à un compte</button>
-            <Signup></Signup>
+    <div>
+        <div class="Auth " v-if="!isLoggedIn">
+            <div v-show="log" class="signup">
+                <button v-on:click="log = false">Se connecter à un compte</button>
+                <Signup></Signup>
+            </div>
+            <div v-show="!log" class="login">
+                <button v-on:click="log = true"> Créer un compte</button>
+                <Login></Login>
+            </div>        
         </div>
-        <div v-show="!log" class="login">
-            <button v-on:click="log = true"> Créer un compte</button>
-            <Login></Login>
-        </div>        
+        <div v-if="isLoggedIn">
+            <h1> Bienvenue sur la plateforme de GROUPOMANIA </h1>
+        </div>
     </div>
 </template>
 
