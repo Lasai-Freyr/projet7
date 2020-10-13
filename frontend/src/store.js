@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+//import axios from 'axios'
 import http from './http';
 
 Vue.use(Vuex)
@@ -33,16 +33,15 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log("Compte 1");
         http.post('/auth/Login', form)
-        .then(res => {
-          console.log("Compte 1.2",res.data);
-          const token = res.data.token;
-          const user = res.data.userId;
+        .then(resp => {
+          console.log("Compte 1.2",resp.data);
+          const token = resp.data.token;
+          const user = resp.data.userId;
           localStorage.setItem('token', token);         
           localStorage.setItem('user', user);         
-          axios.defaults.headers.common['Authorization'] = token;
+         // axios.defaults.headers.common['Authorization'] = token;
           commit('auth_success', token, user);
-          console.log("Compte 2");
-          resolve(res)    
+          resolve(resp)    
         })
         .catch(err => {
           commit('auth_error')
@@ -56,7 +55,7 @@ export default new Vuex.Store({
         commit('logout');
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        delete axios.defaults.headers.common['Authorization'];
+      //  delete axios.defaults.headers.common['Authorization'];
         resolve()
       })
     },
@@ -71,7 +70,7 @@ export default new Vuex.Store({
         http.delete(`/auth/${userId}`);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        delete axios.defaults.headers.common['Authorization']
+      //  delete axios.defaults.headers.common['Authorization']
         
         resolve()
       })

@@ -42,14 +42,14 @@ exports.login = (req, res, next) => {
           if (!valid) { console.log("bidule5");
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
       }console.log("bidule6");
-      res.status(200).json({ 
+      res.status(201).json({ 
           userId: userData.id,
           token: jwt.sign(
             { userId: userData.id},
             '753215846392576321586015406875',
-            { expiresIn: '24h' }            
+            { expiresIn: '24h' }
             )
-          });
+          }); console.log("bidule7");
       })
       if (err) {
         res.status(500).json({ error });   
