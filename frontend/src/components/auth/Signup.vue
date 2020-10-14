@@ -38,11 +38,12 @@ export default {
       const body = {"name": this.name, "address": this.address, "password": this.password};
       axios.post(`http://localhost:8080/api/auth/signup`, body, {'Content-Type': 'multipart/form-data' })
       .then(response => {
+        window.alert("Merci d'avoir créé votre compte.");
       })
       .catch(e => {
         this.errors.push(e)
       })
-      window.alert("Merci d'avoir créé votre compte.");
+      
       this.$router.go();
     }
   }

@@ -9,7 +9,7 @@
         <label for="password">Mot de passe : </label>
         <input type="password" id="passwordLog" name="passwordLog" v-model="passwordLog">
       </div>
-      <input class="button-signup" type="submit" value="Se connecter" @click="login()">
+      <input class="button-signup" type="submit" value="Se connecter" @click.prevent="login()">
     </form>
   </div>    
 </template>
@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     login: function () {
-     console.log("Compte 3");
       const form = {"address": this.addressLog, "password": this.passwordLog };
       let address = this.addressLog;
       let password = this.passwordLog;
@@ -38,6 +37,9 @@ export default {
       console.log( this.addressLog);
       this.$store.dispatch('login', form)
       .then(resp => {
+        if (this.$store.getters.isLoggedIn) {
+          this.$router.push("Home");
+        }
         console.log("ok");
       })
     }

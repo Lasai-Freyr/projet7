@@ -31,10 +31,8 @@ export default new Vuex.Store({
   actions: {
     login({commit}, form){
       return new Promise((resolve, reject) => {
-        console.log("Compte 1");
         http.post('/auth/Login', form)
         .then(resp => {
-          console.log("Compte 1.2",resp.data);
           const token = resp.data.token;
           const user = resp.data.userId;
           localStorage.setItem('token', token);         

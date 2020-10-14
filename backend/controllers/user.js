@@ -35,13 +35,12 @@ exports.login = (req, res, next) => {
       return res.status(401).json({ error: 'Utilisateur non trouvé !' });
 
     } else {
-      console.log("bidule4");
       const userData = data[0];
       bcrypt.compare( user.password, userData.password)
       .then(valid => {
-          if (!valid) { console.log("bidule5");
+          if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
-      }console.log("bidule6");
+      }
       res.status(201).json({ 
           userId: userData.id,
           token: jwt.sign(
@@ -49,7 +48,7 @@ exports.login = (req, res, next) => {
             '753215846392576321586015406875',
             { expiresIn: '24h' }
             )
-          }); console.log("bidule7");
+          });
       })
       if (err) {
         res.status(500).json({ error });   

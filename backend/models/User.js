@@ -21,15 +21,14 @@ User.saveUser = ( user, result) => {
 }
 
 User.findAnUser = (userId, result) => {
-  console.log("truc 1");
   sql.execute(`SELECT * FROM users WHERE users.id = ? OR users.address= ? ;`,
   [`${userId}`,`${userId}`], (err, res) => {
     if (err) {
+      window.alert("adresse inconnue");
       console.log('error: ', err );
       result(null, err);
       return
     }
-    console.log("truc 2");
     result(null, res);
   })
 }
