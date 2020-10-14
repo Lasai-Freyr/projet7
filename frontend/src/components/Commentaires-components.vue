@@ -65,7 +65,8 @@ export default {
         addCom() {
             const form = new FormData();
             form.append("content", content.value);
-            http.post(`/commentaires`, content, {'Content-Type': 'multipart/form-data' })
+            const intel = {"content": content.value, "userId": localStorage.getItem("user") }
+            http.post(`/commentaires`, {intel})
             .then(response => {
             })
             .catch(e => {

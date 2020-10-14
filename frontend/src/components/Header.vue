@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header">
-            <div class="img">
+            <div class="imgNav">
                 <router-link :to="{name: 'Home'}">
                     <img src="../assets/images/icon-left-font-monochrome-white2.png" alt="logo groupomania" id="logo">
                 </router-link>
@@ -59,6 +59,9 @@ export default {
         a:hover{
             cursor: pointer;
         }
+    }
+    .imgNav {
+        max-width: 250px;
     }
     
 </style>

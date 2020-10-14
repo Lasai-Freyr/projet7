@@ -28,7 +28,7 @@ Commentaires.findAll = (id, result) => {
   }
 
 Commentaires.createACom = (id, userId, comObject, result) => {
-  sql.query(`INSERT INTO commentaires values( null, ${id}, "${userId}", "${comObject._value}", NOW());`, (err, res) => {
+  sql.query(`INSERT INTO commentaires values( null, ${id}, "${comObject.userId}", "${comObject.content}", NOW());`, (err, res) => {
     if (err) {
       console.log('error: ', err );
         result(null, err);

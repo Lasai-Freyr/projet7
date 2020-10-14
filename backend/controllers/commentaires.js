@@ -18,7 +18,8 @@ exports.createCommentaire = ( req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, '753215846392576321586015406875');
   const userId = decodedToken.userId;
-  const comObject = req.body;
+  const comObject = req.body.intel;
+  console.log(req.body);
   delete comObject.id;
   const comentaire = new Commentaires({
   ...comObject
