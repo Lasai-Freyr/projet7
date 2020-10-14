@@ -110,6 +110,7 @@ export default {
       form.append("content", content.value);
       form.append("imageFile", this.selectedFile );
       form.append("image", filename );
+      form.append("userId", localStorage.getItem("user"));
       http.post(`/posts`, form, {'Content-Type': 'multipart/form-data' })
       .then(response => {
       })

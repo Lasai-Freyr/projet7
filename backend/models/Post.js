@@ -13,8 +13,8 @@ const Post = function(post) {
   this.usersDisliked = post.usersDisliked
 }
 
-Post.createAPost = (postObject,userId, result) => {
-  sql.query(`INSERT INTO posts values( NOW(), "${postObject.title}", "${userId}", "${postObject.content}", "${postObject.image}", null, 0, 0, "", "")`, (err, res) => {
+Post.createAPost = (postObject, result) => {
+  sql.query(`INSERT INTO posts values( NOW(), "${postObject.title}", "${postObject.userId}", "${postObject.content}", "${postObject.image}", null, 0, 0, "", "")`, (err, res) => {
     if (err) {
       console.log('error: ', err );
         result(null, err);

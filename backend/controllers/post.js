@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 exports.createPost = (req, res) => {  
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, '753215846392576321586015406875');
-  const userId = decodedToken.userId;
+  const userId = req.body.userId;
   const postObject = req.body;
   console.log("user***********", userId);
   delete postObject.id;
@@ -19,7 +19,7 @@ exports.createPost = (req, res) => {
       image: `${req.protocol}://${req.get('host')}/images/${req.body.image}`
     })
 };
-  Post.createAPost(postObject,userId, (err) => {
+  Post.createAPost(postObject, (err) => {
     if (err) {
       res.status(500).send({message: 'Une erreur s\'est produite'});
     }

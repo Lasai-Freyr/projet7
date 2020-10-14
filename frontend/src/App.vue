@@ -4,11 +4,8 @@
     <div>
       <router-view name="newsLine"></router-view>
       <router-view name="Profil"></router-view>
-      <router-view name="Posts"></router-view>
       <router-view name="Post"></router-view>
-      <router-view name="Signup"></router-view>
-      <router-view name="Login"></router-view>
-       <router-view name="Auth"></router-view>
+      <router-view name="Auth"></router-view>
     </div>
   </div>
 
