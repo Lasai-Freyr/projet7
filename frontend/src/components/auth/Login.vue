@@ -38,7 +38,7 @@ export default {
       this.$store.dispatch('login', form)
       .then(resp => {
         if (this.$store.getters.isLoggedIn) {
-          this.$router.push("Home");
+          this.$router.go("Home");
         }
         console.log("ok");
       })

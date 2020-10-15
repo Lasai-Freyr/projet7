@@ -1,8 +1,7 @@
 <template>
   <div id="appForm" class="home">
-    <h1> {{ msg }} </h1>  
+  
     <div>
-      <h2> Quelque chose à partager ?</h2>
       <form class="news-form" @submit="addPost()"> 
         <h2> Quelque chose à partager ?</h2>
         <p>
@@ -20,6 +19,7 @@
       </form>
     </div>
     <div>
+        <h1> {{ msg }} </h1>  
       <Posts></Posts>
     </div>
   </div>
