@@ -18,7 +18,6 @@
 
 <script>
 
-
 export default {
   name: "Login",
   data() {
@@ -37,14 +36,30 @@ export default {
       console.log( this.addressLog);
       this.$store.dispatch('login', form)
       .then(resp => {
+        
         if (this.$store.getters.isLoggedIn) {
           this.$router.push("Home");
         }
         console.log("ok");
       })
+      .catch((data) => {
+        console.log("errorr test", data);
+        if ( data == "Error: Request failed with status code 401" ) {
+         console.log("mail  faux");
+         window.alert("Adresse inconnue");
+
+        } else {
+
+          if ( data == "Error: Request failed with status code 400" ) {
+            window.alert("Mot de passe erroné");
+            console.log("mail ok mdp faux")
+          }
+        }
+      });
     }
   }
 }
+
 </script>
 
 <style>

@@ -10,8 +10,8 @@
             </form>
         </div>
         <div>
-            <ul v-if="commentaires && commentaires.length">
-                <li v-for="commentaire of commentaires" v-bind:key="commentaire.id">
+            <ul v-if="commentaires && commentaires.length" class="ul-com">
+                <li v-for="commentaire of commentaires" v-bind:key="commentaire.id" class="li-com">
                     <div class="comment-box"> 
                     <div class="firstLine">
                         <p class="user">{{commentaire.name}} :</p>
@@ -95,13 +95,15 @@ export default {
         border-radius: 20px;
         box-shadow: gray 4px 4px;
     }
+
     .button {
         margin: 10px;
         border-radius: 12px;
         background-color: #288dcf;
         color: rgb(255, 255, 255);
         font-weight: bold;
-        }
+    }
+
     .comments {
         background-color: #f0d8d8f1;
         width: 75%;
@@ -109,28 +111,43 @@ export default {
         margin-left: 5px;
         font-size: 18px;
     }
+
     .comment-box {
         display:flex;
         flex-flow: wrap;
         flex-direction: column; 
         align-content: center; 
     }
+
     .comment-date {
         width: 250px;
         font-size: 14px;
         text-align: end;
         margin-right: 15px;
     }
+
     .user {
         width: 200px;
         font-size: 16px;
         text-align: end;
     }
-    ul {
+
+    .ul-com {
         margin: auto;
         width: 70%;
         padding: 0px;
+        list-style: none;
     }
+    
+    .li-com {
+      border: solid black 1px;
+      width: 100%;
+      margin: 10px;
+      border-radius: 20px;
+      box-shadow: gray 4px 4px;
+
+    }
+
     .button-red {
         background-color: #ff0000;
         align-self: flex-end;

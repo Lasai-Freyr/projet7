@@ -1,7 +1,7 @@
 <template>
 <div id="app">
-  <ul v-if="posts && posts.length">
-    <li v-for="post of posts" v-bind:key="post.id">
+  <ul v-if="posts && posts.length" class="ul-posts">
+    <li v-for="post of posts" v-bind:key="post.id" class="li-posts">
       <router-link :to="{name: 'Post', params:post, id:post.id}">
         <p class="p-title">{{post.title}}</p>
         <p> 
@@ -56,7 +56,7 @@ export default {
      margin-left: 15px;
      margin-right: 5px;
    }
-  ul {
+  .ul-posts {
     width: 60%;
     display: flex;
     align-items: center;
@@ -64,7 +64,7 @@ export default {
     list-style: none;
     margin: auto;
 
-    li {
+    .li-posts {
       border: solid black 1px;
       width: 100%;
       margin: 10px;
