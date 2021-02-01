@@ -37,7 +37,28 @@ import Likes from '@/components/Likes-components.vue'
             userId: localStorage.getItem('user'),
         } 
     },
-    
+    beforeCreate() {
+        const userId = localStorage.getItem('user');    
+        console.log("userid post",userId);
+        http.get(`/auth/${userId}`)
+            .then(response => {
+            this.user = response.data[0];
+            console.log("user", this.user);
+        });
+    },
+    created() {       
+        const id = this.$route.params.id; 
+           
+        http.get(`/posts/${id}`)
+        .then(response => {
+            console.log("datapost",response.data);
+            this.post = response.data[0];       
+        })
+    },    
+    beforeMounted() {
+        this.$router.go();
+    },
+
     methods: {
         DeletePost(id) {
             http.delete(`/posts/${id}`)
@@ -45,26 +66,7 @@ import Likes from '@/components/Likes-components.vue'
                 this.$router.push( {name:"Home"});
             })
         } 
-    },    
-    beforeCreate() {       
-        const id = this.$route.params.id;        
-        http.get(`/posts/${id}`)
-        .then(response => {
-            console.log(response.data);
-            this.post = response.data[0];       
-        })
-    },
-    beforeMounted() {
-        this.$router.go();
-    },
-    created() {
-        const userId = localStorage.getItem('user');
-        console.log(userId);
-         http.get(`/auth/${userId}`)
-            .then(response => {
-            this.user = response.data[0];
-        });
-    },
+    }    
 }
 </script>
 

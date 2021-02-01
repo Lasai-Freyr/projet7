@@ -11,6 +11,6 @@ const verifyPassword = require('../middleware/verifyPassword');
 router.post('/signup', rateLimiter, verifyPassword, userCtrl.signup);
 router.post('/login', rateLimiter, userCtrl.login);
 router.delete('/:id', auth, userCtrl.delteteAccount);
-router.get('/:id', auth,  userCtrl.findUser)
+router.get('/:id',auth,  userCtrl.findUser)
 
 module.exports = router;

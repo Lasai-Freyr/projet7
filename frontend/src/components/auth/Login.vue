@@ -39,6 +39,7 @@ export default {
         
         if (this.$store.getters.isLoggedIn) {
           this.$router.push("Home");
+          this.$router.go();
         }
         console.log("ok");
       })

@@ -20,12 +20,14 @@ export default {
     }
 
   },
-  mounted() {
+  beforeCreate() {
      const userId = localStorage.getItem('user');
     const id = userId;
+    console.log("temtem", id);
     http.get(`/auth/${id}`)
     .then(response => {
-        this.user = response.data[0];
+      this.user = response.data[0];
+      console.log("bug test", this.user);
     })
   },  
   methods: {
